@@ -1,16 +1,17 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ProductViewComponent } from '../components/product-view/product-view.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProductViewComponent // Tutaj deklarujesz swój komponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    // Tutaj możesz dodać inne moduły, które są używane w aplikacji
   ],
   providers: [],
   bootstrap: [AppComponent]
