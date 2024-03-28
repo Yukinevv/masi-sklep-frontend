@@ -1,5 +1,5 @@
 // product-view.component.ts
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Product } from '../../modules/Product';
 
 @Component({
@@ -8,12 +8,11 @@ import { Product } from '../../modules/Product';
   styleUrls: ['./product-view.component.css']
 })
 export class ProductViewComponent {
-  // Inicjalizacja przykładowego produktu bezpośrednio w komponencie
-  product: Product = new Product(
-    1,
-    'Smartfon XYZ',
-    'Najnowszy model smartfona z wieloma funkcjami.',
-    999.99,
-    'https://example.com/smartfon.jpg'
-  );
+  @Input() product: Product = {
+    id: 0,
+    name: '',
+    description: '',
+    price: 0,
+    imageUrl: ''
+  }
 }
