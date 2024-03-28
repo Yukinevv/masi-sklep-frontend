@@ -1,3 +1,5 @@
 <div *ngFor="let product of products">
-    <app-product-view [product]="product"></app-product-view>
+    <a *ngIf="product.id" [routerLink]="['/product-details', product.id]">
+        <app-product-view [product]="product"></app-product-view>
+    </a>
 </div>
