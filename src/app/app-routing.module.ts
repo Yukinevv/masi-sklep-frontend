@@ -4,10 +4,10 @@ import { ProductDetailsComponent } from '../components/product-details/product-d
 import { ProductListComponent } from '../components/product-list/product-list.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/products', pathMatch: 'full' },
   { path: 'products', component: ProductListComponent },
   { path: 'product-details/:id', component: ProductDetailsComponent },
-  // Możesz dodać więcej ścieżek do innych komponentów
+  { path: '', redirectTo: '/products', pathMatch: 'full' },
+  // inne trasy
 ];
 
 @NgModule({
@@ -15,3 +15,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
