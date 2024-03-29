@@ -23,4 +23,25 @@ export class ProductListComponent {
     );
   }
 
+  applySort(sortDirection: string) {
+    this.filteredProducts.sort((a, b) => {
+      if (a.name < b.name) {
+        return sortDirection === 'asc' ? -1 : 1;
+      }
+      if (a.name > b.name) {
+        return sortDirection === 'asc' ? 1 : -1;
+      }
+      return 0;
+    });
+  }
+
+  addProduct(newProduct: Product) {
+    newProduct.id = this.products.length + 1;
+    this.products.push(newProduct);
+  }
+
+  deleteProduct(id: number) {
+    this.filteredProducts = this.filteredProducts.filter(product => product.id !== id);
+  }
+
 }

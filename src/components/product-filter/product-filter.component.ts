@@ -9,8 +9,13 @@ export class ProductFilterComponent {
   filter: string = '';
 
   @Output() filterChange = new EventEmitter<string>();
+  @Output() sortChange = new EventEmitter<string>();
 
   onFilterChange() {
     this.filterChange.emit(this.filter);
+  }
+
+  sort(direction: string) {
+    this.sortChange.emit(direction);
   }
 }
