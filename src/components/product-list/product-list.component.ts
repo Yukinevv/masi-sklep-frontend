@@ -14,4 +14,13 @@ export class ProductListComponent {
     new Product(4, 'Produkt 4', 'Opis produktu 4', 400, 'urlDoObrazka4'),
     new Product(5, 'Produkt 5', 'Opis produktu 5', 500, 'urlDoObrazka5'),
   ];
+
+  filteredProducts: Product[] = this.products;
+
+  applyFilter(filterValue: string) {
+    this.filteredProducts = this.products.filter(product =>
+      product.name.toLowerCase().includes(filterValue.toLowerCase())
+    );
+  }
+
 }

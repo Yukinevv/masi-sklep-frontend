@@ -1,4 +1,6 @@
-<div *ngFor="let product of products">
+<app-product-filter (filterChange)="applyFilter($event)"></app-product-filter>
+
+<div *ngFor="let product of filteredProducts">
     <a *ngIf="product.id" [routerLink]="['/product-details', product.id]">
         <app-product-view [product]="product"></app-product-view>
     </a>
