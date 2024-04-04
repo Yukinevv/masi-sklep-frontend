@@ -13,6 +13,7 @@ export class ProductViewComponent {
     name: '',
     description: '',
     price: 0,
+    category: '',
     imageUrl: ''
   }
 

@@ -8,14 +8,19 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class ProductFilterComponent {
   filter: string = '';
 
-  @Output() filterChange = new EventEmitter<string>();
+  @Output() filterByNameChange = new EventEmitter<string>();
   @Output() sortChange = new EventEmitter<string>();
+  @Output() filterByCategoryChange = new EventEmitter<string>();
 
-  onFilterChange() {
-    this.filterChange.emit(this.filter);
+  onFilterByNameChange() {
+    this.filterByNameChange.emit(this.filter);
   }
 
   sort(direction: string) {
     this.sortChange.emit(direction);
+  }
+
+  onFilterByCategoryChange(category: string) {
+    this.filterByCategoryChange.emit(category);
   }
 }
