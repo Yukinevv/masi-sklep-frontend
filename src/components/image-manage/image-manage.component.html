@@ -1,0 +1,6 @@
+<div>
+    <input type="file" (change)="onFileSelected($event)">
+    <textarea rows="7" [(ngModel)]="base64String" readonly></textarea>
+
+    <img [src]="base64String" width="200" height="200"/>
+</div>

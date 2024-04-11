@@ -1,0 +1,11 @@
+<div>
+    <input type="text" [(ngModel)]="filter" (ngModelChange)="onFilterByNameChange()"
+        placeholder="Filtruj produkty po nazwie...">
+
+    <button (click)="sort('asc')">Sortuj rosnąco</button>
+    <button (click)="sort('desc')">Sortuj malejąco</button>
+
+    <button (click)="onFilterByCategoryChange('komputery')">Komputery</button>
+    <button (click)="onFilterByCategoryChange('telefony')">Telefony</button>
+    <button (click)="onFilterByCategoryChange('telewizory')">Telewizory</button>
+</div>

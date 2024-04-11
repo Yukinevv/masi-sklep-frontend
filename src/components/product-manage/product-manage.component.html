@@ -1,0 +1,18 @@
+<div class="product-manage">
+    <h2>Dodaj nowy produkt</h2>
+    <form (submit)="addProduct()">
+        <label>
+            Nazwa:
+            <input type="text" [(ngModel)]="newProduct.name" name="name">
+        </label>
+        <label>
+            Opis:
+            <input type="text" [(ngModel)]="newProduct.description" name="description">
+        </label>
+        <label>
+            Cena:
+            <input type="number" [(ngModel)]="newProduct.price" name="price">
+        </label>
+        <button type="submit">Dodaj produkt</button>
+    </form>
+</div>

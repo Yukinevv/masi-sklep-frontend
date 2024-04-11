@@ -1,5 +1,5 @@
 // product-view.component.ts
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Product } from '../../modules/Product';
 
 @Component({
@@ -13,6 +13,8 @@ export class ProductViewComponent {
     name: '',
     description: '',
     price: 0,
+    category: '',
     imageUrl: ''
   }
+
 }

@@ -1,3 +1,16 @@
-<div *ngFor="let product of products">
-    <app-product-view [product]="product"></app-product-view>
+<app-product-filter (filterByNameChange)="applyFilterByName($event)" (sortChange)="applySort($event)" (filterByCategoryChange)="applyFilterByCategory($event)"></app-product-filter>
+
+<app-product-manage (addProductEvent)="addProduct($event)"></app-product-manage>
+
+<app-image-manage></app-image-manage>
+
+
+<div class="product-list-container">
+    <div *ngFor="let product of filteredProducts" class="product-item">
+        <a *ngIf="product.id" [routerLink]="['/product-details', product.id]">
+            <app-product-view [product]="product"></app-product-view>
+        </a>
+
+        <button (click)="deleteProduct(product.id)">Usuń</button>
+    </div>
 </div>
