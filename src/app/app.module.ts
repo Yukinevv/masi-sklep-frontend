@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ProductFilterComponent } from '../components/product-filter/product-filter.component';
 import { ProductManageComponent } from '../components/product-manage/product-manage.component';
+import { ImageManageComponent } from '../components/image-manage/image-manage.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ProductManageComponent } from '../components/product-manage/product-man
     ProductListComponent,
     ProductDetailsComponent,
     ProductFilterComponent,
-    ProductManageComponent
+    ProductManageComponent,
+    ImageManageComponent
   ],
   imports: [
     BrowserModule,
