@@ -13,6 +13,7 @@ import { ProductManageComponent } from '../components/product-manage/product-man
 import { ImageManageComponent } from '../components/image-manage/image-manage.component';
 import { UserRegistrationComponent } from '../components/user-registration/user-registration.component';
 import { HttpClientModule } from '@angular/common/http';
+import { UserLoginComponent } from '../components/user-login/user-login.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
     ProductFilterComponent,
     ProductManageComponent,
     ImageManageComponent,
-    UserRegistrationComponent
+    UserRegistrationComponent,
+    UserLoginComponent
   ],
   imports: [
     BrowserModule,
