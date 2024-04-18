@@ -7,10 +7,12 @@ import { ProductListComponent } from '../components/product-list/product-list.co
 import { ProductDetailsComponent } from '../components/product-details/product-details.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductFilterComponent } from '../components/product-filter/product-filter.component';
 import { ProductManageComponent } from '../components/product-manage/product-manage.component';
 import { ImageManageComponent } from '../components/image-manage/image-manage.component';
+import { UserRegistrationComponent } from '../components/user-registration/user-registration.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,13 +22,16 @@ import { ImageManageComponent } from '../components/image-manage/image-manage.co
     ProductDetailsComponent,
     ProductFilterComponent,
     ProductManageComponent,
-    ImageManageComponent
+    ImageManageComponent,
+    UserRegistrationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

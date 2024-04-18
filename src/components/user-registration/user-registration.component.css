@@ -1,0 +1,55 @@
+/* Stylowanie kontenera formularza */
+form {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+/* Stylowanie etykiet i elementów input */
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Stylowanie przycisku */
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Stylowanie komunikatów o błędach */
+div p {
+  color: red;
+  font-size: 12px;
+  margin: 5px 0;
+}
+
+/* Style dla nagłówka formularza */
+h3 {
+  text-align: center;
+  color: #333;
+}

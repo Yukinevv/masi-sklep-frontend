@@ -1,0 +1,46 @@
+<h3>testttest</h3>
+
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="username">Username</label>
+        <input type="text" formControlName="username">
+        <div *ngIf="registerForm.controls['username'].errors && submitted">
+            <!-- Komunikaty o błędach dla username -->
+            <p *ngIf="registerForm.controls['username'].errors['required']">Username is required.</p>
+            <p *ngIf="registerForm.controls['username'].errors['minlength']">Username must be at least 3 characters
+                long.</p>
+        </div>
+    </div>
+
+    <div>
+        <label for="email">Email</label>
+        <input type="email" formControlName="email">
+        <div *ngIf="registerForm.controls['email'].errors && submitted">
+            <!-- Komunikaty o błędach dla email -->
+            <p *ngIf="registerForm.controls['email'].errors['required']">Email is required.</p>
+            <p *ngIf="registerForm.controls['email'].errors['email']">Email must be a valid email address.</p>
+        </div>
+    </div>
+
+    <div>
+        <label for="password">Password</label>
+        <input type="password" formControlName="password">
+        <div *ngIf="registerForm.controls['password'].errors && submitted">
+            <!-- Komunikaty o błędach dla password -->
+            <p *ngIf="registerForm.controls['password'].errors['required']">Password is required.</p>
+            <p *ngIf="registerForm.controls['password'].errors['minlength']">Password must be at least 6 characters
+                long.</p>
+        </div>
+    </div>
+
+    <div>
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" formControlName="confirmPassword">
+        <div *ngIf="registerForm.controls['confirmPassword'].errors && submitted">
+            <!-- Komunikaty o błędach dla confirmPassword -->
+            <p *ngIf="registerForm.controls['confirmPassword'].errors['mustMatch']">Passwords must match.</p>
+        </div>
+    </div>
+
+    <button type="submit">Register</button>
+</form>
