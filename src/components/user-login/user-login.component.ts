@@ -23,6 +23,10 @@ export class UserLoginComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     });
+
+    if (localStorage.getItem('jwt_token')) {
+      this.router.navigate(['/products']);
+    }
   }
 
   onSubmit() {
@@ -31,17 +35,18 @@ export class UserLoginComponent implements OnInit {
       return;
     }
 
-    // this.authService.login(this.loginForm.value).subscribe({
-    //   next: (response) => {
-    //     console.log('Login successful', response);
-    //     this.router.navigate(['/products']);
-    //   },
-    //   error: (error) => {
-    //     console.error('Login failed', error);
-    //   }
-    // });
+    const email = this.loginForm.value.email
+    const password = this.loginForm.value.password
 
-    this.router.navigate(['/products']);
+    this.authService.login(email, password).subscribe({
+      next: (response) => {
+        console.log('Login successful', response);
+        this.router.navigate(['/products']);
+      },
+      error: (error) => {
+        console.error('Login failed', error);
+      }
+    });
   }
 }
 

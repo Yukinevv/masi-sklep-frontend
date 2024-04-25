@@ -60,6 +60,8 @@ export class ProductListComponent implements OnInit {
   addProduct(newProduct: Product) {
     newProduct.id = this.products.length + 1;
     this.products.push(newProduct);
+
+    // wyslanie produktu do api
   }
 
   deleteProduct(id: number) {
