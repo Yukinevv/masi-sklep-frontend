@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-image-manage',
@@ -6,16 +6,14 @@ import { Component } from '@angular/core';
   styleUrl: './image-manage.component.css'
 })
 export class ImageManageComponent {
-  base64String: string;
-
-  constructor() {
-    this.base64String = '';
-  }
+  @Output() base64Event = new EventEmitter<string>();
+  base64String: string = ''
 
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
     if (file) {
       this.convertImageToBase64(file).then(base64 => {
+        this.base64Event.emit(base64);
         this.base64String = base64;
       });
     }

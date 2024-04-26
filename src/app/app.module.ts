@@ -12,8 +12,9 @@ import { ProductFilterComponent } from '../components/product-filter/product-fil
 import { ProductManageComponent } from '../components/product-manage/product-manage.component';
 import { ImageManageComponent } from '../components/image-manage/image-manage.component';
 import { UserRegistrationComponent } from '../components/user-registration/user-registration.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { UserLoginComponent } from '../components/user-login/user-login.component';
+import { AuthInterceptor } from '../services/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,9 @@ import { UserLoginComponent } from '../components/user-login/user-login.componen
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

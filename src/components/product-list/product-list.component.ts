@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../modules/Product';
 import { ProductService } from '../../services/product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -20,9 +21,14 @@ export class ProductListComponent implements OnInit {
 
   filteredProducts: Product[] = this.products;
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private router: Router) { }
 
   ngOnInit(): void {
+    // roboczo jezeli nie ma tokenu to przekierowuje na strone logowania
+    if (!localStorage.getItem('jwt_token')) {
+      this.router.navigate(['/login']);
+    }
+
     this.productService.getProducts().subscribe(
       (response: Product[]) => {
         this.products.push(...response);
@@ -59,9 +65,17 @@ export class ProductListComponent implements OnInit {
 
   addProduct(newProduct: Product) {
     newProduct.id = this.products.length + 1;
-    this.products.push(newProduct);
 
     // wyslanie produktu do api
+    this.productService.addProduct(newProduct).subscribe({
+      next: (response) => {
+        console.log('Product added successful', response);
+        this.products.push(newProduct);
+      },
+      error: (error) => {
+        console.error('Product adding failed', error);
+      }
+    });
   }
 
   deleteProduct(id: number) {
