@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../../modules/Product';
 import { ProductService } from '../../services/product.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-product-list',
@@ -21,13 +22,16 @@ export class ProductListComponent implements OnInit {
 
   filteredProducts: Product[] = this.products;
 
-  constructor(private productService: ProductService, private router: Router) { }
+  isAdmin = false;
+
+  constructor(private productService: ProductService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     // roboczo jezeli nie ma tokenu to przekierowuje na strone logowania
-    if (!localStorage.getItem('jwt_token')) {
+    if (!this.authService.getToken()) {
       this.router.navigate(['/login']);
     }
+    this.isAdmin = this.authService.isAdmin();
 
     this.productService.getProducts().subscribe(
       (response: Product[]) => {
@@ -37,6 +41,10 @@ export class ProductListComponent implements OnInit {
         console.error('Error fetching products', error);
       }
     );
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 
   applyFilterByName(filterValue: string) {
