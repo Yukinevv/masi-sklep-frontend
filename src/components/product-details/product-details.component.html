@@ -1,4 +1,13 @@
-<div *ngIf="productId">
+<div *ngIf="product">
     <a [routerLink]="['/products']" class="back-button"><i class="fa fa-arrow-left"></i> Powrót do listy</a>
-    Szczegóły produktu dla ID: {{ productId }}
+    <div class="product-details">
+        <input type="text" [(ngModel)]="product.name">
+        <img [src]="product.imageUrl" alt="{{ product.name }}" width="200" height="200">
+        <textarea [(ngModel)]="product.description"></textarea>
+        <input type="number" [(ngModel)]="product.price">
+        <!-- <input type="text" [(ngModel)]="product.category"> -->
+        <input type="number" [(ngModel)]="product.quantity">
+
+        <button (click)="saveProduct()">Zapisz zmiany</button>
+    </div>
 </div>

@@ -3,6 +3,9 @@ import { Product } from '../../modules/Product';
 import { ProductService } from '../../services/product.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { ProductSharingService } from '../../services/product-sharing.service';
 
 @Component({
   selector: 'app-product-list',
@@ -20,11 +23,12 @@ export class ProductListComponent implements OnInit {
 
   products: Product[] = []
 
-  filteredProducts: Product[] = this.products;
+  filteredProducts: Product[] = []
 
   isAdmin = false;
 
-  constructor(private productService: ProductService, private authService: AuthService, private router: Router) { }
+  constructor(private productService: ProductService, private authService: AuthService,
+    private router: Router, private productSharingService: ProductSharingService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     // roboczo jezeli nie ma tokenu to przekierowuje na strone logowania
@@ -36,15 +40,24 @@ export class ProductListComponent implements OnInit {
     this.productService.getProducts().subscribe(
       (response: Product[]) => {
         this.products.push(...response);
+        this.filteredProducts = this.products.filter(product => product.quantity !== null);
       },
       (error) => {
         console.error('Error fetching products', error);
       }
     );
+    // this.productService.getProducts().subscribe((data: any[]) => {
+    //   this.products = data;
+    //   this.filteredProducts = this.products.filter(product => product.quantity !== null);
+    // });
   }
 
   logout(): void {
     this.authService.logout();
+  }
+
+  selectProduct(product: Product) {
+    this.productSharingService.setCurrentProduct(product);
   }
 
   applyFilterByName(filterValue: string) {
@@ -87,7 +100,21 @@ export class ProductListComponent implements OnInit {
   }
 
   deleteProduct(id: number) {
-    this.filteredProducts = this.filteredProducts.filter(product => product.id !== id);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.productService.deleteProduct(id).subscribe({
+          next: (response) => {
+            console.log('Product deleted successful', response);
+            this.filteredProducts = this.filteredProducts.filter(product => product.id !== id);
+          },
+          error: (error) => {
+            console.error('Product deleting failed', error);
+          }
+        });
+      }
+    });
   }
 
 }

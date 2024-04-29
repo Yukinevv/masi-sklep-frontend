@@ -15,6 +15,8 @@ import { UserRegistrationComponent } from '../components/user-registration/user-
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { UserLoginComponent } from '../components/user-login/user-login.component';
 import { AuthInterceptor } from '../services/auth.interceptor';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { AuthInterceptor } from '../services/auth.interceptor';
     ProductManageComponent,
     ImageManageComponent,
     UserRegistrationComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,8 @@ import { AuthInterceptor } from '../services/auth.interceptor';
     HttpClientModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })

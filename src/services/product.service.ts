@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Product } from '../modules/Product';
 import { Observable } from 'rxjs';
 
@@ -18,5 +18,23 @@ export class ProductService {
 
   addProduct(productData: Product) {
     return this.http.post(`${this.apiUrl}/product`, productData, { responseType: 'text' });
+  }
+
+  updateProduct(product: Product): Observable<Product> {
+    return this.http.put<Product>(`${this.apiUrl}/product`, product);
+  }
+
+  // deleteProduct(id: number) {
+  //   return this.http.delete(`${this.apiUrl}/product${id}`);
+  // }
+
+  deleteProduct(productId: number): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      body: JSON.stringify({ id: productId })
+    };
+    return this.http.delete(`${this.apiUrl}/product`, httpOptions);
   }
 }

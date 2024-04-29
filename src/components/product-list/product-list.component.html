@@ -10,10 +10,9 @@
 
 <div class="product-list-container">
     <div *ngFor="let product of filteredProducts" class="product-item">
-        <a *ngIf="product.id" [routerLink]="['/product-details', product.id]">
+        <a *ngIf="product.id" [routerLink]="['/product-details', product.id]" (click)="selectProduct(product)">
             <app-product-view [product]="product"></app-product-view>
         </a>
-
         <button (click)="deleteProduct(product.id)">Usuń</button>
     </div>
 </div>
