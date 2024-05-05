@@ -1,8 +1,17 @@
 <div class="product-view">
-    <h2>{{ product.name }}</h2>
-    <img [src]="product.imageUrl" alt="{{ product.name }}" />
-    <p>{{ product.description }}</p>
-    <p class="price">Cena: {{ product.price }} zł</p>
-    <p>{{ product.category }}</p>
-    <p>{{ product.quantity }}</p>
+    <a [routerLink]="['/product-details', product.id]" (click)="selectProduct(product)">
+        <h2>{{ product.name }}</h2>
+        <img [src]="product.imageUrl" alt="{{ product.name }}" />
+        <p>{{ product.description }}</p>
+        <p class="price">Cena: {{ product.price }} zł</p>
+        <p>{{ product.category }}</p>
+        <p>Ilość w magazynie: {{ product.quantity }}</p>
+    </a>
+
+    <div>
+        <input type="number" [(ngModel)]="selectedQuantity" min="1" [max]="product.quantity" value="1">
+        <button (click)="addToCart()" class="add-button">Dodaj do koszyka</button>
+    </div>
+
+    <button (click)="deleteProduct(product.id)" class="delete-button">Usuń</button>
 </div>

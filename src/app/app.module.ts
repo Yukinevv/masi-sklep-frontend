@@ -17,6 +17,9 @@ import { UserLoginComponent } from '../components/user-login/user-login.componen
 import { AuthInterceptor } from '../services/auth.interceptor';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dialog.component';
+import { CartComponent } from '../components/cart/cart.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,8 @@ import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dia
     ImageManageComponent,
     UserRegistrationComponent,
     UserLoginComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +41,9 @@ import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dia
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatToolbarModule,
+    MatIconModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -4,8 +4,7 @@ import { ProductService } from '../../services/product.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
-import { ProductSharingService } from '../../services/product-sharing.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product-list',
@@ -13,13 +12,6 @@ import { ProductSharingService } from '../../services/product-sharing.service';
   styleUrl: './product-list.component.css'
 })
 export class ProductListComponent implements OnInit {
-  // products: Product[] = [
-  //   new Product(1, 'Produkt 1', 'Opis produktu 1', 100, 'telefony', 'urlDoObrazka1'),
-  //   new Product(2, 'Produkt 2', 'Opis produktu 2', 200, 'telewizory', 'urlDoObrazka2'),
-  //   new Product(3, 'Produkt 3', 'Opis produktu 3', 300, 'komputery', 'urlDoObrazka3'),
-  //   new Product(4, 'Produkt 4', 'Opis produktu 4', 400, 'komputery', 'urlDoObrazka4'),
-  //   new Product(5, 'Produkt 5', 'Opis produktu 5', 500, 'telewizory', 'urlDoObrazka5'),
-  // ];
 
   products: Product[] = []
 
@@ -28,7 +20,7 @@ export class ProductListComponent implements OnInit {
   isAdmin = false;
 
   constructor(private productService: ProductService, private authService: AuthService,
-    private router: Router, private productSharingService: ProductSharingService, public dialog: MatDialog) { }
+    private router: Router, private cartService: CartService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     // roboczo jezeli nie ma tokenu to przekierowuje na strone logowania
@@ -46,18 +38,14 @@ export class ProductListComponent implements OnInit {
         console.error('Error fetching products', error);
       }
     );
-    // this.productService.getProducts().subscribe((data: any[]) => {
-    //   this.products = data;
-    //   this.filteredProducts = this.products.filter(product => product.quantity !== null);
-    // });
   }
 
   logout(): void {
     this.authService.logout();
   }
 
-  selectProduct(product: Product) {
-    this.productSharingService.setCurrentProduct(product);
+  handleAddToCart(event: { product: Product, quantity: number }) {
+    this.cartService.addItem(event.product, event.quantity);
   }
 
   applyFilterByName(filterValue: string) {
@@ -100,21 +88,7 @@ export class ProductListComponent implements OnInit {
   }
 
   deleteProduct(id: number) {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.productService.deleteProduct(id).subscribe({
-          next: (response) => {
-            console.log('Product deleted successful', response);
-            this.filteredProducts = this.filteredProducts.filter(product => product.id !== id);
-          },
-          error: (error) => {
-            console.error('Product deleting failed', error);
-          }
-        });
-      }
-    });
+    this.filteredProducts = this.filteredProducts.filter(product => product.id !== id);
   }
 
 }

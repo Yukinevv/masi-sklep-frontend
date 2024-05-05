@@ -3,16 +3,11 @@
 <app-product-filter (filterByNameChange)="applyFilterByName($event)" (sortChange)="applySort($event)"
     (filterByCategoryChange)="applyFilterByCategory($event)"></app-product-filter>
 
-<div *ngIf="isAdmin">
-    <app-product-manage (addProductEvent)="addProduct($event)"></app-product-manage>
-</div>
-
+<app-product-manage *ngIf="isAdmin" (addProductEvent)="addProduct($event)"></app-product-manage>
 
 <div class="product-list-container">
     <div *ngFor="let product of filteredProducts" class="product-item">
-        <a *ngIf="product.id" [routerLink]="['/product-details', product.id]" (click)="selectProduct(product)">
-            <app-product-view [product]="product"></app-product-view>
-        </a>
-        <button (click)="deleteProduct(product.id)">Usuń</button>
+        <app-product-view *ngIf="product.id" [product]="product" (onAddToCart)="handleAddToCart($event)"
+            (deleteProductEvent)="deleteProduct($event)"></app-product-view>
     </div>
 </div>

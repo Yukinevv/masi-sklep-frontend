@@ -2,6 +2,10 @@ h1 {
   text-align: center;
 }
 
+.spacer {
+  flex: 1 1 auto;
+}
+
 .container {
   margin-left: 25px;
   margin-right: 25px;

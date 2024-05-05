@@ -1,6 +1,10 @@
-<div>
-    <h1>Serwis Aukcyjny</h1>
-</div>
+<mat-toolbar color="primary">
+    <span>Sklepu MASI</span>
+    <span class="spacer"></span> <!-- Flex spacer -->
+    <a mat-icon-button [routerLink]="['/cart']">
+        <mat-icon>shopping_cart</mat-icon>
+    </a>
+</mat-toolbar>
 
 <div class="container">
     <router-outlet></router-outlet>
