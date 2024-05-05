@@ -13,5 +13,5 @@
         <button (click)="addToCart()" class="add-button">Dodaj do koszyka</button>
     </div>
 
-    <button (click)="deleteProduct(product.id)" class="delete-button">Usuń</button>
+    <button *ngIf="isAdmin" (click)="deleteProduct(product.id)" class="delete-button">Usuń</button>
 </div>

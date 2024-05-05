@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'products', component: ProductListComponent },
   { path: 'product-details/:id', component: ProductDetailsComponent },
   { path: 'cart', component: CartComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/products', pathMatch: 'full' },
   // inne trasy
 ];
 

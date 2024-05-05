@@ -1,27 +1,27 @@
-<h2>Rejestracja</h2>
-
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <h2>Rejestracja</h2>
+
     <div>
-        <label for="name">Name</label>
+        <label for="name">Imię</label>
         <input type="text" formControlName="name">
         <div *ngIf="registerForm.controls['name'].errors && submitted">
-            <p *ngIf="registerForm.controls['name'].errors['required']">Name is required.</p>
+            <p *ngIf="registerForm.controls['name'].errors['required']">Imię jest wymagane.</p>
         </div>
     </div>
 
     <div>
-        <label for="surname">Surname</label>
+        <label for="surname">Nazwisko</label>
         <input type="text" formControlName="surname">
         <div *ngIf="registerForm.controls['surname'].errors && submitted">
-            <p *ngIf="registerForm.controls['surname'].errors['required']">Surname is required.</p>
+            <p *ngIf="registerForm.controls['surname'].errors['required']">Nazwisko jest wymagane.</p>
         </div>
     </div>
 
     <div>
-        <label for="address">Address</label>
+        <label for="address">Adres</label>
         <input type="text" formControlName="address">
         <div *ngIf="registerForm.controls['address'].errors && submitted">
-            <p *ngIf="registerForm.controls['address'].errors['required']">Address is required.</p>
+            <p *ngIf="registerForm.controls['address'].errors['required']">Adres jest wymagany.</p>
         </div>
     </div>
 
@@ -29,29 +29,31 @@
         <label for="email">Email</label>
         <input type="email" formControlName="email">
         <div *ngIf="registerForm.controls['email'].errors && submitted">
-            <p *ngIf="registerForm.controls['email'].errors['required']">Email is required.</p>
-            <p *ngIf="registerForm.controls['email'].errors['email']">Email must be a valid email address.</p>
+            <p *ngIf="registerForm.controls['email'].errors['required']">Email jest wymagany.</p>
+            <p *ngIf="registerForm.controls['email'].errors['email']">To nie jest poprawny adres email.</p>
         </div>
     </div>
 
     <div>
-        <label for="password">Password</label>
+        <label for="password">Hasło</label>
         <input type="password" formControlName="password">
         <div *ngIf="registerForm.controls['password'].errors && submitted">
-            <p *ngIf="registerForm.controls['password'].errors['required']">Password is required.</p>
-            <p *ngIf="registerForm.controls['password'].errors['minlength']">Password must be at least 6 characters
-                long.</p>
+            <p *ngIf="registerForm.controls['password'].errors['required']">Hasło jest wymagane.</p>
+            <p *ngIf="registerForm.controls['password'].errors['minlength']">Hasło musi składać się z co najmniej 6
+                znaków.</p>
         </div>
     </div>
 
     <div>
-        <label for="confirmPassword">Confirm Password</label>
+        <label for="confirmPassword">Powtórz hasło</label>
         <input type="password" formControlName="confirmPassword">
         <div *ngIf="registerForm.controls['confirmPassword'].errors && submitted">
-            <p *ngIf="registerForm.controls['confirmPassword'].errors['mustMatch']">Passwords must match.</p>
+            <p *ngIf="registerForm.controls['confirmPassword'].errors['mustMatch']">Hasła muszą być takie same.</p>
         </div>
     </div>
 
-    <button type="submit">Register</button>
+    <p *ngIf="isRegistrationFailed">Rejestracja nie powiodła się!</p>
+
+    <button type="submit">Zarejestruj</button>
     <button type="button" class="link-button" routerLink="/login">Logowanie</button>
 </form>

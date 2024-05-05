@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode';
 import { Router } from '@angular/router';
@@ -13,8 +13,15 @@ export interface LoginResponse {
   providedIn: 'root'
 })
 export class AuthService {
+  private userEmailSubject = new BehaviorSubject<string | null>(null);
+  public userEmail = this.userEmailSubject.asObservable();
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {
+    const storedEmail = localStorage.getItem('userEmail');
+    if (storedEmail) {
+      this.userEmailSubject.next(storedEmail);
+    }
+  }
 
   private apiUrl = 'http://localhost:8090';
 
@@ -27,6 +34,9 @@ export class AuthService {
       tap(response => {
         if (response.token) {
           localStorage.setItem('jwt_token', response.token);
+
+          localStorage.setItem('userEmail', email);
+          this.userEmailSubject.next(email);
         }
       })
     );
@@ -36,8 +46,14 @@ export class AuthService {
     // Usuwanie tokena z localStorage
     localStorage.removeItem('jwt_token');
 
-    // Przekierowanie na stronę logowania
-    this.router.navigate(['/login']);
+    localStorage.removeItem('userEmail');
+    this.userEmailSubject.next(null);
+
+    // this.router.navigate(['/login']);
+  }
+
+  getUserEmail(): string | null {
+    return this.userEmailSubject.value;
   }
 
   // Zapisz token JWT w localStorage

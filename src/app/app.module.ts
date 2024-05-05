@@ -20,6 +20,7 @@ import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dia
 import { CartComponent } from '../components/cart/cart.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { NavbarComponent } from '../components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { MatIconModule } from '@angular/material/icon';
     UserRegistrationComponent,
     UserLoginComponent,
     ConfirmDialogComponent,
-    CartComponent
+    CartComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

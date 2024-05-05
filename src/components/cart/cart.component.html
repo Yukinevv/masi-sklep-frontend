@@ -1,4 +1,3 @@
-<!-- cart.component.html -->
 <div *ngIf="cartItems.length > 0; else emptyCart">
     <div *ngFor="let item of cartItems">
         <img [src]="item.product.imageUrl" alt="{{ item.product.name }}" width="50" height="50">

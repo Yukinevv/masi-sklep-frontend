@@ -17,17 +17,15 @@ export class ProductListComponent implements OnInit {
 
   filteredProducts: Product[] = []
 
-  isAdmin = false;
+  isAdmin: boolean = false;
+  isLoggedIn: boolean = false;
 
   constructor(private productService: ProductService, private authService: AuthService,
     private router: Router, private cartService: CartService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    // roboczo jezeli nie ma tokenu to przekierowuje na strone logowania
-    if (!this.authService.getToken()) {
-      this.router.navigate(['/login']);
-    }
     this.isAdmin = this.authService.isAdmin();
+    this.isLoggedIn = this.authService.getUserEmail() != null ? true: false;
 
     this.productService.getProducts().subscribe(
       (response: Product[]) => {
@@ -51,12 +49,6 @@ export class ProductListComponent implements OnInit {
   applyFilterByName(filterValue: string) {
     this.filteredProducts = this.products.filter(product =>
       product.name.toLowerCase().includes(filterValue.toLowerCase())
-    );
-  }
-
-  applyFilterByCategory(filterCategory: string) {
-    this.filteredProducts = this.products.filter(product =>
-      product.category.toLowerCase() === filterCategory.toLowerCase()
     );
   }
 

@@ -1,17 +1,18 @@
 // product-view.component.ts
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Product } from '../../modules/Product';
 import { ProductSharingService } from '../../services/product-sharing.service';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductService } from '../../services/product.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-product-view',
   templateUrl: './product-view.component.html',
   styleUrls: ['./product-view.component.css']
 })
-export class ProductViewComponent {
+export class ProductViewComponent implements OnInit {
   @Input() product: Product = {
     id: 0,
     name: '',
@@ -27,8 +28,14 @@ export class ProductViewComponent {
   @Output() deleteProductEvent = new EventEmitter<number>();
 
   selectedQuantity: number = 1;
+  isAdmin: boolean = false;
 
-  constructor(private productSharingService: ProductSharingService, private productService: ProductService, public dialog: MatDialog) { }
+  constructor(private productSharingService: ProductSharingService, private productService: ProductService,
+    private authService: AuthService, public dialog: MatDialog) { }
+
+  ngOnInit(): void {
+    this.isAdmin = this.authService.isAdmin();
+  }
 
   selectProduct(product: Product) {
     this.productSharingService.setCurrentProduct(product);

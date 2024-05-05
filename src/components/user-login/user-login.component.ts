@@ -10,7 +10,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class UserLoginComponent implements OnInit {
   loginForm!: FormGroup;
-  submitted = false;
+  submitted: boolean = false;
+  isLoginFailed: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -31,6 +32,7 @@ export class UserLoginComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    this.isLoginFailed = false;
     if (this.loginForm.invalid) {
       return;
     }
@@ -45,6 +47,7 @@ export class UserLoginComponent implements OnInit {
       },
       error: (error) => {
         console.error('Login failed', error);
+        this.isLoginFailed = true;
       }
     });
   }

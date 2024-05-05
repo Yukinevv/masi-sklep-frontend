@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../modules/Product';
 import { ProductSharingService } from '../../services/product-sharing.service';
+import { AuthService } from '../../services/auth.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product-details',
@@ -11,10 +13,16 @@ import { ProductSharingService } from '../../services/product-sharing.service';
 export class ProductDetailsComponent implements OnInit {
   product: Product | null = null;
 
+  selectedQuantity: number = 1;
+
+  isAdmin: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
+    private authService: AuthService,
     private productSharingService: ProductSharingService,
+    private cartService: CartService,
     private router: Router
   ) { }
 
@@ -26,6 +34,8 @@ export class ProductDetailsComponent implements OnInit {
       if (!this.product || this.product.id !== productId) {
         this.router.navigate(['/products']);
       }
+
+      this.isAdmin = this.authService.isAdmin();
     });
   }
 
@@ -40,6 +50,12 @@ export class ProductDetailsComponent implements OnInit {
           console.error('Error updating product:', error);
         }
       });
+    }
+  }
+
+  addToCart() {
+    if (this.selectedQuantity > 0 && this.selectedQuantity <= this.product!.quantity) {
+      this.cartService.addItem(this.product!, this.product!.quantity);
     }
   }
 

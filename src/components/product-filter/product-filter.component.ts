@@ -10,7 +10,6 @@ export class ProductFilterComponent {
 
   @Output() filterByNameChange = new EventEmitter<string>();
   @Output() sortChange = new EventEmitter<string>();
-  @Output() filterByCategoryChange = new EventEmitter<string>();
 
   onFilterByNameChange() {
     this.filterByNameChange.emit(this.filter);
@@ -18,9 +17,5 @@ export class ProductFilterComponent {
 
   sort(direction: string) {
     this.sortChange.emit(direction);
-  }
-
-  onFilterByCategoryChange(category: string) {
-    this.filterByCategoryChange.emit(category);
   }
 }
