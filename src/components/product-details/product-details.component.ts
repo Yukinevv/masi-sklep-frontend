@@ -5,6 +5,7 @@ import { Product } from '../../modules/Product';
 import { ProductSharingService } from '../../services/product-sharing.service';
 import { AuthService } from '../../services/auth.service';
 import { CartService } from '../../services/cart.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-details',
@@ -23,7 +24,8 @@ export class ProductDetailsComponent implements OnInit {
     private authService: AuthService,
     private productSharingService: ProductSharingService,
     private cartService: CartService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -55,7 +57,11 @@ export class ProductDetailsComponent implements OnInit {
 
   addToCart() {
     if (this.selectedQuantity > 0 && this.selectedQuantity <= this.product!.quantity) {
-      this.cartService.addItem(this.product!, this.product!.quantity);
+      this.cartService.addItem(this.product!, this.selectedQuantity);
+
+      this.snackBar.open('Produkt dodany do koszyka', 'Zamknij', {
+        duration: 2000,
+      });
     }
   }
 

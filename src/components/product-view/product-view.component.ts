@@ -6,6 +6,7 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 import { MatDialog } from '@angular/material/dialog';
 import { ProductService } from '../../services/product.service';
 import { AuthService } from '../../services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-view',
@@ -31,7 +32,7 @@ export class ProductViewComponent implements OnInit {
   isAdmin: boolean = false;
 
   constructor(private productSharingService: ProductSharingService, private productService: ProductService,
-    private authService: AuthService, public dialog: MatDialog) { }
+    private authService: AuthService, private snackBar: MatSnackBar, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.isAdmin = this.authService.isAdmin();
@@ -44,6 +45,10 @@ export class ProductViewComponent implements OnInit {
   addToCart() {
     if (this.selectedQuantity > 0 && this.selectedQuantity <= this.product.quantity) {
       this.onAddToCart.emit({ product: this.product, quantity: this.selectedQuantity });
+
+      this.snackBar.open('Produkt dodany do koszyka', 'Zamknij', {
+        duration: 2000,
+      });
     }
   }
 

@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode';
 import { Router } from '@angular/router';
+import { User } from '../modules/User';
 
 export interface LoginResponse {
   token: string;
@@ -25,8 +26,19 @@ export class AuthService {
 
   private apiUrl = 'http://localhost:8090';
 
-  register(userData: any) {
-    return this.http.post(`${this.apiUrl}/register`, userData, { responseType: 'text' });
+  // register(userData: any) {
+  //   return this.http.post(`${this.apiUrl}/register`, userData, { responseType: 'text' });
+  // }
+
+  register(userData: User): Observable<User> {
+    return this.http.post<User>(`${this.apiUrl}/register`, userData).pipe(
+      tap(response => {
+        if (response) {
+          localStorage.setItem('userEmail', userData.email);
+          this.userEmailSubject.next(userData.email);
+        }
+      })
+    );
   }
 
   login(email: string, password: string): Observable<LoginResponse> {

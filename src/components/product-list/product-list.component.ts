@@ -40,6 +40,7 @@ export class ProductListComponent implements OnInit {
 
   logout(): void {
     this.authService.logout();
+    this.isLoggedIn = false;
   }
 
   handleAddToCart(event: { product: Product, quantity: number }) {
