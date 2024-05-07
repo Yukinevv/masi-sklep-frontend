@@ -4,13 +4,17 @@ import { ProductDetailsComponent } from '../components/product-details/product-d
 import { ProductListComponent } from '../components/product-list/product-list.component';
 import { UserRegistrationComponent } from '../components/user-registration/user-registration.component';
 import { UserLoginComponent } from '../components/user-login/user-login.component';
+import { CartComponent } from '../components/cart/cart.component';
+import { OrdersComponent } from '../components/orders/orders.component';
 
 const routes: Routes = [
   { path: 'registration', component: UserRegistrationComponent },
   { path: 'login', component: UserLoginComponent },
   { path: 'products', component: ProductListComponent },
   { path: 'product-details/:id', component: ProductDetailsComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'cart', component: CartComponent },
+  { path: 'orders', component: OrdersComponent },
+  { path: '', redirectTo: '/products', pathMatch: 'full' },
   // inne trasy
 ];
 

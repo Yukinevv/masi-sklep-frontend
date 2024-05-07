@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../modules/Product';
 import { ProductService } from '../../services/product.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product-list',
@@ -8,24 +12,25 @@ import { ProductService } from '../../services/product.service';
   styleUrl: './product-list.component.css'
 })
 export class ProductListComponent implements OnInit {
-  // products: Product[] = [
-  //   new Product(1, 'Produkt 1', 'Opis produktu 1', 100, 'telefony', 'urlDoObrazka1'),
-  //   new Product(2, 'Produkt 2', 'Opis produktu 2', 200, 'telewizory', 'urlDoObrazka2'),
-  //   new Product(3, 'Produkt 3', 'Opis produktu 3', 300, 'komputery', 'urlDoObrazka3'),
-  //   new Product(4, 'Produkt 4', 'Opis produktu 4', 400, 'komputery', 'urlDoObrazka4'),
-  //   new Product(5, 'Produkt 5', 'Opis produktu 5', 500, 'telewizory', 'urlDoObrazka5'),
-  // ];
 
   products: Product[] = []
 
-  filteredProducts: Product[] = this.products;
+  filteredProducts: Product[] = []
 
-  constructor(private productService: ProductService) { }
+  isAdmin: boolean = false;
+  isLoggedIn: boolean = false;
+
+  constructor(private productService: ProductService, private authService: AuthService,
+    private router: Router, private cartService: CartService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.isAdmin = this.authService.isAdmin();
+    this.isLoggedIn = this.authService.getUserEmail() != null ? true: false;
+
     this.productService.getProducts().subscribe(
       (response: Product[]) => {
         this.products.push(...response);
+        this.filteredProducts = this.products.filter(product => product.quantity !== null);
       },
       (error) => {
         console.error('Error fetching products', error);
@@ -33,15 +38,18 @@ export class ProductListComponent implements OnInit {
     );
   }
 
+  logout(): void {
+    this.authService.logout();
+    this.isLoggedIn = false;
+  }
+
+  handleAddToCart(event: { product: Product, quantity: number }) {
+    this.cartService.addItem(event.product, event.quantity);
+  }
+
   applyFilterByName(filterValue: string) {
     this.filteredProducts = this.products.filter(product =>
       product.name.toLowerCase().includes(filterValue.toLowerCase())
-    );
-  }
-
-  applyFilterByCategory(filterCategory: string) {
-    this.filteredProducts = this.products.filter(product =>
-      product.category.toLowerCase() === filterCategory.toLowerCase()
     );
   }
 
@@ -59,9 +67,17 @@ export class ProductListComponent implements OnInit {
 
   addProduct(newProduct: Product) {
     newProduct.id = this.products.length + 1;
-    this.products.push(newProduct);
 
     // wyslanie produktu do api
+    this.productService.addProduct(newProduct).subscribe({
+      next: (response) => {
+        console.log('Product added successful', response);
+        this.products.push(newProduct);
+      },
+      error: (error) => {
+        console.error('Product adding failed', error);
+      }
+    });
   }
 
   deleteProduct(id: number) {

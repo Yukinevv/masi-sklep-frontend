@@ -12,8 +12,18 @@ import { ProductFilterComponent } from '../components/product-filter/product-fil
 import { ProductManageComponent } from '../components/product-manage/product-manage.component';
 import { ImageManageComponent } from '../components/image-manage/image-manage.component';
 import { UserRegistrationComponent } from '../components/user-registration/user-registration.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { UserLoginComponent } from '../components/user-login/user-login.component';
+import { AuthInterceptor } from '../services/auth.interceptor';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dialog.component';
+import { CartComponent } from '../components/cart/cart.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { NavbarComponent } from '../components/navbar/navbar.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { OrdersComponent } from '../components/orders/orders.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +35,11 @@ import { UserLoginComponent } from '../components/user-login/user-login.componen
     ProductManageComponent,
     ImageManageComponent,
     UserRegistrationComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    ConfirmDialogComponent,
+    CartComponent,
+    NavbarComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule,
@@ -33,9 +47,16 @@ import { UserLoginComponent } from '../components/user-login/user-login.componen
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatToolbarModule,
+    MatIconModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -11,7 +11,8 @@ import { User } from '../../modules/User';
 })
 export class UserRegistrationComponent {
   registerForm: FormGroup;
-  submitted = false;
+  submitted: boolean = false;
+  isRegistrationFailed: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {
     this.registerForm = this.formBuilder.group({
@@ -45,6 +46,7 @@ export class UserRegistrationComponent {
 
   onSubmit() {
     this.submitted = true;
+    this.isRegistrationFailed = false;
     if (this.registerForm.invalid) {
       return;
     }
@@ -67,6 +69,7 @@ export class UserRegistrationComponent {
       },
       error => {
         console.log('Error registering user', error);
+        this.isRegistrationFailed = true;
       }
     );
   }

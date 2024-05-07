@@ -1,22 +1,26 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <h2>Logowanie</h2>
+
     <div>
         <label for="email">Email</label>
         <input type="email" formControlName="email">
         <div *ngIf="loginForm.controls['email'].errors && submitted">
-            <p *ngIf="loginForm.controls['email'].errors['required']">Email is required.</p>
-            <p *ngIf="loginForm.controls['email'].errors['email']">Enter a valid email.</p>
+            <p *ngIf="loginForm.controls['email'].errors['required']">Email jest wymagany.</p>
+            <p *ngIf="loginForm.controls['email'].errors['email']">Wpisz poprawny adres email.</p>
         </div>
     </div>
 
     <div>
-        <label for="password">Password</label>
+        <label for="password">Hasło</label>
         <input type="password" formControlName="password">
         <div *ngIf="loginForm.controls['password'].errors && submitted">
-            <p *ngIf="loginForm.controls['password'].errors['required']">Password is required.</p>
+            <p *ngIf="loginForm.controls['password'].errors['required']">Hasło jest wymagane.</p>
         </div>
     </div>
 
-    <button type="submit">Login</button>
+    <p *ngIf="isLoginFailed">Podano nieprawidłowe dane!</p>
+
+    <button type="submit">Zaloguj</button>
 
     <button type="button" class="link-button" routerLink="/registration">Rejestracja</button>
 </form>

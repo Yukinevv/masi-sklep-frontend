@@ -1,0 +1,13 @@
+<div *ngIf="orders.length > 0; else noOrders">
+    <div *ngFor="let order of orders">
+        <h2>Zamówienie {{ order.orderId }} z dnia {{ order.date }}</h2>
+        <ul>
+            <li *ngFor="let product of order.products">
+                {{ product.name }} - {{ product.quantity }} sztuk za {{ product.price }} zł/szt
+            </li>
+        </ul>
+    </div>
+</div>
+<ng-template #noOrders>
+    <p>Brak zamówień.</p>
+</ng-template>

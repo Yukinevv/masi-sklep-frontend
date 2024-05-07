@@ -13,6 +13,13 @@
             Cena:
             <input type="number" [(ngModel)]="newProduct.price" name="price">
         </label>
+        <label>
+            Ilość:
+            <input type="number" [(ngModel)]="newProduct.quantity" name="price">
+        </label>
+
+        <app-image-manage (base64Event)="onImageLoaded($event)"></app-image-manage>
+
         <button type="submit">Dodaj produkt</button>
     </form>
 </div>

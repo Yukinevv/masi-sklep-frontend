@@ -17,24 +17,3 @@
   justify-content: center;
   align-items: center;
 }
-
-.product-item a {
-  display: block; /* Sprawia, że link zajmuje całą dostępną szerokość dla łatwiejszego kliknięcia */
-  color: black;
-  text-decoration: none;
-  margin-bottom: 10px;
-}
-
-.product-item button {
-  cursor: pointer;
-  width: 100px;
-  padding: 5px 10px;
-  background-color: #f44336;
-  color: white;
-  border: none;
-  border-radius: 5px;
-}
-
-.product-item button:hover {
-  background-color: darkred;
-}
