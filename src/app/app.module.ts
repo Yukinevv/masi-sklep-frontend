@@ -23,6 +23,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { NavbarComponent } from '../components/navbar/navbar.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { OrdersComponent } from '../components/orders/orders.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UserLoginComponent,
     ConfirmDialogComponent,
     CartComponent,
-    NavbarComponent
+    NavbarComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule,

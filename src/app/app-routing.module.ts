@@ -5,6 +5,7 @@ import { ProductListComponent } from '../components/product-list/product-list.co
 import { UserRegistrationComponent } from '../components/user-registration/user-registration.component';
 import { UserLoginComponent } from '../components/user-login/user-login.component';
 import { CartComponent } from '../components/cart/cart.component';
+import { OrdersComponent } from '../components/orders/orders.component';
 
 const routes: Routes = [
   { path: 'registration', component: UserRegistrationComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'products', component: ProductListComponent },
   { path: 'product-details/:id', component: ProductDetailsComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'orders', component: OrdersComponent },
   { path: '', redirectTo: '/products', pathMatch: 'full' },
   // inne trasy
 ];

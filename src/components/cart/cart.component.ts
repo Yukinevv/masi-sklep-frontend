@@ -4,6 +4,7 @@ import { CartService } from '../../services/cart.service';
 import { CartItem } from '../../modules/CartItem';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-cart',
@@ -13,7 +14,9 @@ import { Router } from '@angular/router';
 export class CartComponent implements OnInit {
   cartItems: CartItem[] = [];
 
-  constructor(private cartService: CartService, private authService: AuthService, private router: Router) { }
+  constructor(private cartService: CartService, private authService: AuthService, private router: Router,
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
     if (!this.authService.getToken()) {
@@ -31,5 +34,19 @@ export class CartComponent implements OnInit {
 
   clearCart(): void {
     this.cartService.clearCart();
+  }
+
+  placeOrder(): void {
+    this.cartService.placeOrder(this.cartItems).subscribe({
+      next: (response) => {
+        this.snackBar.open('Zamówienie zostało złożone pomyślnie!', 'Zamknij', { duration: 3000 });
+        this.cartItems = [];
+        this.cartService.clearCart();
+      },
+      error: (error) => {
+        this.snackBar.open('Wystąpił błąd przy składaniu zamówienia.', 'Zamknij', { duration: 3000 });
+        console.error('Error placing order:', error);
+      }
+    });
   }
 }
