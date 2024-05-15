@@ -1,13 +1,23 @@
 .product-manage {
-  border: 1px dashed darkorange;
-  padding: 10px;
-  padding-bottom: 20px;
-  margin-bottom: 10px;
-  margin-top: 20px;
+  @apply p-6 bg-white rounded-lg shadow-lg space-y-6;
 }
 
-form {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
+.heading {
+  @apply text-2xl font-semibold mb-4 text-gray-700;
+}
+
+.form-container {
+  @apply space-y-4;
+}
+
+.form-label {
+  @apply block text-gray-600 mb-2;
+}
+
+.input-field {
+  @apply w-full p-2 border border-gray-300 rounded-md;
+}
+
+.submit-button {
+  @apply mt-4;
 }

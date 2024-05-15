@@ -1,7 +1,9 @@
-<div>
+<div class="filter-sort-container">
     <input type="text" [(ngModel)]="filter" (ngModelChange)="onFilterByNameChange()"
-        placeholder="Filtruj produkty po nazwie...">
+        placeholder="Filtruj produkty po nazwie..." class="filter-input">
 
-    <button (click)="sort('asc')">Sortuj rosnąco</button>
-    <button (click)="sort('desc')">Sortuj malejąco</button>
+    <div class="sort-buttons">
+        <button mat-raised-button color="primary" (click)="sort('asc')">Sortuj rosnąco</button>
+        <button mat-raised-button color="primary" (click)="sort('desc')">Sortuj malejąco</button>
+    </div>
 </div>

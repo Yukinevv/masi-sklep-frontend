@@ -25,7 +25,7 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.isAdmin = this.authService.isAdmin();
-    this.isLoggedIn = this.authService.getUserEmail() != null ? true: false;
+    this.isLoggedIn = this.authService.getUserEmail() != null ? true : false;
 
     this.productService.getProducts().subscribe(
       (response: Product[]) => {
@@ -36,11 +36,6 @@ export class ProductListComponent implements OnInit {
         console.error('Error fetching products', error);
       }
     );
-  }
-
-  logout(): void {
-    this.authService.logout();
-    this.isLoggedIn = false;
   }
 
   handleAddToCart(event: { product: Product, quantity: number }) {
@@ -73,6 +68,7 @@ export class ProductListComponent implements OnInit {
       next: (response) => {
         console.log('Product added successful', response);
         this.products.push(newProduct);
+        this.filteredProducts = this.products.filter(product => product.quantity !== null);
       },
       error: (error) => {
         console.error('Product adding failed', error);

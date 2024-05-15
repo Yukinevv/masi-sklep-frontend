@@ -1,22 +1,11 @@
-button {
-    padding: 10px;
-    margin-right: 20px;
-    border: 1px solid black;
-    border-radius: 5px;
-    background-color: orange;
-    color: white;
+.filter-sort-container {
+  @apply flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4 items-center p-4 bg-gray-100 rounded-md shadow-md;
 }
 
-button:hover {
-    background-color: darkorange;
+.filter-input {
+  @apply w-full md:w-96 p-2 border border-gray-300 rounded-md;
 }
 
-input {
-    width: 250px;
-    height: 40px;
-    font-size: 16px;
-    border: 1px solid black;
-    border-radius: 3px;
-    margin-right: 30px;
-    margin-left: 5px;
+.sort-buttons {
+  @apply flex space-x-4;
 }

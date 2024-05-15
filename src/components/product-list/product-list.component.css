@@ -1,19 +1,7 @@
-/* Styl dla kontenera z produktami */
 .product-list-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6;
 }
 
 .product-item {
-  border: 1px solid #ccc;
-  margin: 10px 0;
-  padding: 10px;
-  width: 70%;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @apply p-4;
 }

@@ -1,25 +1,25 @@
 <div class="product-manage">
-    <h2>Dodaj nowy produkt</h2>
-    <form (submit)="addProduct()">
-        <label>
+    <h2 class="heading">Dodaj nowy produkt</h2>
+    <form (submit)="addProduct()" class="form-container">
+        <label class="form-label">
             Nazwa:
-            <input type="text" [(ngModel)]="newProduct.name" name="name">
+            <input type="text" [(ngModel)]="newProduct.name" name="name" class="input-field">
         </label>
-        <label>
+        <label class="form-label">
             Opis:
-            <input type="text" [(ngModel)]="newProduct.description" name="description">
+            <input type="text" [(ngModel)]="newProduct.description" name="description" class="input-field">
         </label>
-        <label>
+        <label class="form-label">
             Cena:
-            <input type="number" [(ngModel)]="newProduct.price" name="price">
+            <input type="number" [(ngModel)]="newProduct.price" name="price" class="input-field">
         </label>
-        <label>
+        <label class="form-label">
             Ilość:
-            <input type="number" [(ngModel)]="newProduct.quantity" name="price">
+            <input type="number" [(ngModel)]="newProduct.quantity" name="quantity" class="input-field">
         </label>
 
         <app-image-manage (base64Event)="onImageLoaded($event)"></app-image-manage>
 
-        <button type="submit">Dodaj produkt</button>
+        <button type="submit" mat-raised-button color="primary" class="submit-button">Dodaj produkt</button>
     </form>
 </div>

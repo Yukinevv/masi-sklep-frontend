@@ -1,10 +1,32 @@
+.product-container {
+  @apply space-y-4 p-4;
+}
+
 .back-button {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  border: none;
-  background-color: #f8f9fa;
-  cursor: pointer;
-  padding: 10px;
-  border-radius: 5px;
+  @apply text-blue-500 hover:text-blue-700 flex items-center space-x-2 mb-4;
+}
+
+.product-details {
+  @apply bg-white shadow-md rounded-lg p-6 space-y-4 max-w-2xl mx-auto;
+}
+
+.input-field {
+  @apply w-full p-2 border border-gray-300 rounded-md;
+}
+
+.product-image {
+  @apply w-full max-w-xs h-auto object-cover mx-auto;
+}
+
+.purchase-section {
+  @apply mt-4 flex items-center space-x-4;
+}
+
+.add-button {
+  @apply text-white bg-blue-500 hover:bg-blue-700 py-2 px-4 rounded-md;
+}
+
+.input-field:disabled,
+.input-field[readonly] {
+  @apply bg-gray-100;
 }

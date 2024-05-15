@@ -1,14 +1,14 @@
-h1 {
-  text-align: center;
+/* html, */
+/* body, */
+/* #app-root, */
+.main-container {
+  @apply min-h-screen flex flex-col;
 }
 
-.container {
-  margin-left: 25px;
-  margin-right: 25px;
+.main-container {
+  @apply flex-1 flex flex-col items-center justify-center;
 }
 
-footer {
-  text-align: center;
-  margin-top: 10px;
-  margin-bottom: 5px;
+.footer {
+  @apply bg-gray-800 text-white text-center p-4;
 }

@@ -1,12 +1,15 @@
-<div *ngIf="cartItems.length > 0; else emptyCart">
-    <div *ngFor="let item of cartItems">
-        <img [src]="item.product.imageUrl" alt="{{ item.product.name }}" width="50" height="50">
-        <p>{{ item.product.name }} - {{ item.product.price }} zł, Qty: {{ item.quantity }}</p>
-        <button (click)="removeItem(item.product.id)">Usuń</button>
+<div *ngIf="cartItems.length > 0; else emptyCart" class="cart-container">
+    <div *ngFor="let item of cartItems" class="cart-item">
+        <img [src]="item.product.imageUrl" alt="{{ item.product.name }}" class="cart-item-image">
+        <p class="cart-item-details">{{ item.product.name }} - {{ item.product.price }} zł, Qty: {{ item.quantity }}</p>
+        <button mat-button color="warn" (click)="removeItem(item.product.id)" class="remove-button">Usuń</button>
     </div>
-    <button (click)="clearCart()">Wyczyść koszyk</button>
-    <button (click)="placeOrder()">Złóż zamówienie</button>
+    <div class="cart-actions">
+        <button mat-raised-button color="warn" (click)="clearCart()" class="cart-action-button">Wyczyść koszyk</button>
+        <button mat-raised-button color="primary" (click)="placeOrder()" class="cart-action-button">Złóż
+            zamówienie</button>
+    </div>
 </div>
 <ng-template #emptyCart>
-    <p>Your cart is empty.</p>
+    <p class="empty-cart-message">Twój koszyk jest pusty.</p>
 </ng-template>

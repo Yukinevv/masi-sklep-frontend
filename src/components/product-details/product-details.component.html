@@ -1,18 +1,16 @@
-<div *ngIf="product">
+<div *ngIf="product" class="product-container">
     <a [routerLink]="['/products']" class="back-button"><i class="fa fa-arrow-left"></i> Powrót do listy</a>
     <div *ngIf="isAdmin" class="product-details">
-        <input type="text" [(ngModel)]="product.name">
-        <img [src]="product.imageUrl" alt="{{ product.name }}" width="200" height="200">
-        <textarea [(ngModel)]="product.description"></textarea>
-        <input type="number" [(ngModel)]="product.price">
-        <!-- <input type="text" [(ngModel)]="product.category"> -->
-        <input type="number" [(ngModel)]="product.quantity">
-
-        <button (click)="saveProduct()">Zapisz zmiany</button>
+        <input type="text" [(ngModel)]="product.name" class="input-field" placeholder="Nazwa produktu">
+        <img [src]="product.imageUrl" alt="{{ product.name }}" class="product-image">
+        <textarea [(ngModel)]="product.description" class="input-field" placeholder="Opis produktu"></textarea>
+        <input type="number" [(ngModel)]="product.price" class="input-field" placeholder="Cena">
+        <input type="number" [(ngModel)]="product.quantity" class="input-field" placeholder="Ilość">
+        <button mat-raised-button color="primary" (click)="saveProduct()">Zapisz zmiany</button>
     </div>
-
-    <div>
-        <input type="number" [(ngModel)]="selectedQuantity" min="1" [max]="product.quantity" value="1">
-        <button (click)="addToCart()" class="add-button">Dodaj do koszyka</button>
+    <div class="purchase-section">
+        <input type="number" [(ngModel)]="selectedQuantity" min="1" [max]="product.quantity" value="1"
+            class="input-field">
+        <button mat-raised-button color="accent" (click)="addToCart()" class="add-button">Dodaj do koszyka</button>
     </div>
 </div>

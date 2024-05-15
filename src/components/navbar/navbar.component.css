@@ -1,3 +1,31 @@
+.toolbar {
+  @apply bg-blue-600 text-white flex items-center justify-between px-6;
+}
+
+.logo {
+  @apply flex items-center;
+}
+
 .spacer {
-  flex: 1 1 auto;
+  @apply flex-grow;
+}
+
+.right-section {
+  @apply flex items-center space-x-4;
+}
+
+.user-email {
+  @apply text-base mr-4;
+}
+
+a[mat-icon-button] {
+  @apply text-white;
+}
+
+mat-icon {
+  @apply text-xl;
+}
+
+.logout-button {
+  @apply text-white bg-red-500 hover:bg-red-700 font-semibold py-2 px-4 rounded;
 }

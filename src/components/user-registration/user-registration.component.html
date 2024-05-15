@@ -1,59 +1,62 @@
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <h2>Rejestracja</h2>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+    <h2 class="form-title">Rejestracja</h2>
 
-    <div>
-        <label for="name">Imię</label>
-        <input type="text" formControlName="name">
-        <div *ngIf="registerForm.controls['name'].errors && submitted">
-            <p *ngIf="registerForm.controls['name'].errors['required']">Imię jest wymagane.</p>
+    <div class="form-group">
+        <label for="name" class="form-label">Imię</label>
+        <input type="text" formControlName="name" class="input-field">
+        <div *ngIf="registerForm.controls['name'].errors && submitted" class="error-messages">
+            <p *ngIf="registerForm.controls['name'].errors['required']" class="error-text">Imię jest wymagane.</p>
         </div>
     </div>
 
-    <div>
-        <label for="surname">Nazwisko</label>
-        <input type="text" formControlName="surname">
-        <div *ngIf="registerForm.controls['surname'].errors && submitted">
-            <p *ngIf="registerForm.controls['surname'].errors['required']">Nazwisko jest wymagane.</p>
+    <div class="form-group">
+        <label for="surname" class="form-label">Nazwisko</label>
+        <input type="text" formControlName="surname" class="input-field">
+        <div *ngIf="registerForm.controls['surname'].errors && submitted" class="error-messages">
+            <p *ngIf="registerForm.controls['surname'].errors['required']" class="error-text">Nazwisko jest wymagane.
+            </p>
         </div>
     </div>
 
-    <div>
-        <label for="address">Adres</label>
-        <input type="text" formControlName="address">
-        <div *ngIf="registerForm.controls['address'].errors && submitted">
-            <p *ngIf="registerForm.controls['address'].errors['required']">Adres jest wymagany.</p>
+    <div class="form-group">
+        <label for="address" class="form-label">Adres</label>
+        <input type="text" formControlName="address" class="input-field">
+        <div *ngIf="registerForm.controls['address'].errors && submitted" class="error-messages">
+            <p *ngIf="registerForm.controls['address'].errors['required']" class="error-text">Adres jest wymagany.</p>
         </div>
     </div>
 
-    <div>
-        <label for="email">Email</label>
-        <input type="email" formControlName="email">
-        <div *ngIf="registerForm.controls['email'].errors && submitted">
-            <p *ngIf="registerForm.controls['email'].errors['required']">Email jest wymagany.</p>
-            <p *ngIf="registerForm.controls['email'].errors['email']">To nie jest poprawny adres email.</p>
+    <div class="form-group">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" formControlName="email" class="input-field">
+        <div *ngIf="registerForm.controls['email'].errors && submitted" class="error-messages">
+            <p *ngIf="registerForm.controls['email'].errors['required']" class="error-text">Email jest wymagany.</p>
+            <p *ngIf="registerForm.controls['email'].errors['email']" class="error-text">To nie jest poprawny adres
+                email.</p>
         </div>
     </div>
 
-    <div>
-        <label for="password">Hasło</label>
-        <input type="password" formControlName="password">
-        <div *ngIf="registerForm.controls['password'].errors && submitted">
-            <p *ngIf="registerForm.controls['password'].errors['required']">Hasło jest wymagane.</p>
-            <p *ngIf="registerForm.controls['password'].errors['minlength']">Hasło musi składać się z co najmniej 6
-                znaków.</p>
+    <div class="form-group">
+        <label for="password" class="form-label">Hasło</label>
+        <input type="password" formControlName="password" class="input-field">
+        <div *ngIf="registerForm.controls['password'].errors && submitted" class="error-messages">
+            <p *ngIf="registerForm.controls['password'].errors['required']" class="error-text">Hasło jest wymagane.</p>
+            <p *ngIf="registerForm.controls['password'].errors['minlength']" class="error-text">Hasło musi składać się z
+                co najmniej 6 znaków.</p>
         </div>
     </div>
 
-    <div>
-        <label for="confirmPassword">Powtórz hasło</label>
-        <input type="password" formControlName="confirmPassword">
-        <div *ngIf="registerForm.controls['confirmPassword'].errors && submitted">
-            <p *ngIf="registerForm.controls['confirmPassword'].errors['mustMatch']">Hasła muszą być takie same.</p>
+    <div class="form-group">
+        <label for="confirmPassword" class="form-label">Powtórz hasło</label>
+        <input type="password" formControlName="confirmPassword" class="input-field">
+        <div *ngIf="registerForm.controls['confirmPassword'].errors && submitted" class="error-messages">
+            <p *ngIf="registerForm.controls['confirmPassword'].errors['mustMatch']" class="error-text">Hasła muszą być
+                takie same.</p>
         </div>
     </div>
 
-    <p *ngIf="isRegistrationFailed">Rejestracja nie powiodła się!</p>
+    <p *ngIf="isRegistrationFailed" class="error-text">Rejestracja nie powiodła się!</p>
 
-    <button type="submit">Zarejestruj</button>
-    <button type="button" class="link-button" routerLink="/login">Logowanie</button>
+    <button type="submit" mat-raised-button color="primary" class="submit-button">Zarejestruj</button>
+    <button type="button" mat-button class="link-button" routerLink="/login">Logowanie</button>
 </form>

@@ -1,0 +1,31 @@
+.orders-container {
+  @apply space-y-6 flex flex-col items-center p-4;
+}
+
+.orders-title {
+  @apply text-2xl font-bold text-gray-800 mb-4;
+}
+
+.sort-buttons {
+  @apply flex space-x-4 mb-6;
+}
+
+.order-card {
+  @apply w-full max-w-3xl p-6 bg-white rounded-lg shadow-md mb-6;
+}
+
+.order-title {
+  @apply text-xl font-semibold mb-4 text-gray-700;
+}
+
+.order-products {
+  @apply list-disc list-inside border border-gray-300 rounded-md p-4;
+}
+
+.product-item {
+  @apply text-gray-600 mb-2;
+}
+
+.no-orders-message {
+  @apply text-center text-gray-500 mt-4;
+}

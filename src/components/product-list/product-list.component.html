@@ -1,9 +1,5 @@
-<button *ngIf="isLoggedIn" (click)="logout()">Wyloguj się</button>
-
 <app-product-filter (filterByNameChange)="applyFilterByName($event)"
     (sortChange)="applySort($event)"></app-product-filter>
-
-<app-product-manage *ngIf="isAdmin" (addProductEvent)="addProduct($event)"></app-product-manage>
 
 <div class="product-list-container">
     <div *ngFor="let product of filteredProducts" class="product-item">
@@ -11,3 +7,5 @@
             (deleteProductEvent)="deleteProduct($event)"></app-product-view>
     </div>
 </div>
+
+<app-product-manage *ngIf="isAdmin" (addProductEvent)="addProduct($event)"></app-product-manage>

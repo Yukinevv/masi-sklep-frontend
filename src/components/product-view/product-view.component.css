@@ -1,49 +1,41 @@
 .product-view {
-  border: 1px solid #ddd;
-  padding: 20px;
-  margin-bottom: 20px;
-  width: 300px;
+  @apply p-6 bg-white rounded-lg shadow-lg space-y-4;
 }
 
-.product-view img {
-  max-width: 100%;
-  height: auto;
+.product-link {
+  @apply block text-center space-y-4 no-underline hover:no-underline;
+}
+
+.product-title {
+  @apply text-2xl font-semibold text-gray-800;
+}
+
+.product-image {
+  @apply w-full h-48 object-cover rounded-md;
+}
+
+.product-description,
+.product-category,
+.product-quantity {
+  @apply text-gray-600;
 }
 
 .price {
-  font-weight: bold;
+  @apply text-xl font-bold text-green-600;
 }
 
-.product-view a {
-  display: block; /* Sprawia, że link zajmuje całą dostępną szerokość dla łatwiejszego kliknięcia */
-  color: black;
-  text-decoration: none;
-  margin-bottom: 10px;
+.purchase-section {
+  @apply flex items-center space-x-4 mt-4;
 }
 
-.product-view button {
-  cursor: pointer;
-  width: 100px;
-  padding: 5px 10px;
-  color: white;
-  border: none;
-  border-radius: 5px;
+.input-field {
+  @apply w-16 p-2 border border-gray-300 rounded-md;
 }
 
 .add-button {
-  background-color: #1c89c9;
-  margin-left: 10px;
-}
-
-.add-button:hover {
-  background-color: darkblue;
+  @apply text-white bg-blue-500 hover:bg-blue-700 py-2 px-4 rounded-md;
 }
 
 .delete-button {
-  background-color: #f44336;
-  margin-top: 10px;
-}
-
-.delete-button:hover {
-  background-color: darkred;
+  @apply mt-4;
 }

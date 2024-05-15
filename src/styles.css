@@ -1,5 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html,
 body {
   height: 100%;
@@ -7,16 +17,4 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-.mat-dialog-container {
-  background-color: #007bff; /* Niebieski kolor tła */
-  color: #ffffff; /* Biały kolor tekstu */
-  border-radius: 8px; /* Zaokrąglone rogi */
-}
-
-.mat-dialog-actions button {
-  color: #ffffff; /* Biały kolor tekstu */
-  background-color: #0056b3; /* Ciemniejszy niebieski dla przycisków */
-  margin: 5px;
 }

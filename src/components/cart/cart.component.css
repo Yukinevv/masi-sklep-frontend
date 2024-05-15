@@ -1,0 +1,32 @@
+.cart-container {
+  @apply p-6 bg-white rounded-lg shadow-md space-y-4;
+  width: 500px;
+}
+
+.cart-item {
+  @apply flex items-center w-full space-x-4 border-b border-gray-200 pb-4 mb-4;
+}
+
+.cart-item-image {
+  @apply w-12 h-12 object-cover rounded-md;
+}
+
+.cart-item-details {
+  @apply flex-1 text-gray-700;
+}
+
+.remove-button {
+  @apply text-red-500 hover:text-red-700;
+}
+
+.cart-actions {
+  @apply flex justify-between mt-4;
+}
+
+.cart-action-button {
+  @apply px-4 py-2;
+}
+
+.empty-cart-message {
+  @apply text-center text-gray-500;
+}

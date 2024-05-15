@@ -1,17 +1,19 @@
 <div class="product-view">
-    <a [routerLink]="['/product-details', product.id]" (click)="selectProduct(product)">
-        <h2>{{ product.name }}</h2>
-        <img [src]="product.imageUrl" alt="{{ product.name }}" />
-        <p>{{ product.description }}</p>
+    <a [routerLink]="['/product-details', product.id]" (click)="selectProduct(product)" class="product-link">
+        <h2 class="product-title">{{ product.name }}</h2>
+        <img [src]="product.imageUrl" alt="{{ product.name }}" class="product-image" />
+        <p class="product-description">{{ product.description }}</p>
         <p class="price">Cena: {{ product.price }} zł</p>
-        <p>{{ product.category }}</p>
-        <p>Ilość w magazynie: {{ product.quantity }}</p>
+        <p class="product-category">{{ product.category }}</p>
+        <p class="product-quantity">Ilość w magazynie: {{ product.quantity }}</p>
     </a>
 
-    <div>
-        <input type="number" [(ngModel)]="selectedQuantity" min="1" [max]="product.quantity" value="1">
-        <button (click)="addToCart()" class="add-button">Dodaj do koszyka</button>
+    <div class="purchase-section">
+        <input type="number" [(ngModel)]="selectedQuantity" min="1" [max]="product.quantity" value="1"
+            class="input-field">
+        <button mat-raised-button color="accent" (click)="addToCart()" class="add-button">Dodaj do koszyka</button>
     </div>
 
-    <button *ngIf="isAdmin" (click)="deleteProduct(product.id)" class="delete-button">Usuń</button>
+    <button *ngIf="isAdmin" mat-raised-button color="warn" (click)="deleteProduct(product.id)"
+        class="delete-button">Usuń</button>
 </div>
