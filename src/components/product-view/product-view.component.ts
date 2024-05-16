@@ -19,7 +19,6 @@ export class ProductViewComponent implements OnInit {
     name: '',
     description: '',
     price: 0,
-    category: '',
     quantity: 0,
     imageUrl: ''
   }
