@@ -1,27 +1,122 @@
-# AuctionSite
+# Sklep Internetowy MASI
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.1.
+Sklep Internetowy MASI to aplikacja e-commerce napisana w Angularze, umożliwiająca użytkownikom przeglądanie produktów, dodawanie ich do koszyka oraz składanie zamówień. Administratorzy mają możliwość zarządzania produktami, w tym dodawania, edytowania i usuwania produktów.
 
-## Development server
+## Technologie
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Angular**: Framework do budowy aplikacji webowych.
+- **Angular Material**: Biblioteka komponentów UI dla Angulara.
+- **Tailwind CSS**: Narzędzie do budowy nowoczesnych interfejsów użytkownika.
+- **RxJS**: Biblioteka do programowania reaktywnego.
+- **TypeScript**: Superset języka JavaScript, dodający statyczne typowanie.
 
-## Code scaffolding
+## Wymagania
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Node.js (wersja 14.x lub nowsza)
+- npm (wersja 6.x lub nowsza) lub yarn (wersja 1.x lub nowsza)
+- Angular CLI (wersja 12.x lub nowsza)
 
-## Build
+## Instalacja
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. Sklonuj repozytorium:
 
-## Running unit tests
+    ```bash
+    git clone https://github.com/Yukinevv/masi-sklep-frontend.git
+    cd masi-sklep-frontend
+    ```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+2. Zainstaluj zależności:
 
-## Running end-to-end tests
+    ```bash
+    npm install
+    ```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+    lub
 
-## Further help
+    ```bash
+    yarn install
+    ```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Uruchomienie projektu
+
+Aby uruchomić projekt lokalnie, użyj następującej komendy:
+
+```bash
+ng serve
+```
+
+Aplikacja będzie dostępna pod adresem http://localhost:4200.
+
+## Struktura projektu
+
+src/
+├── app/
+│   ├── components/
+│   │   ├── navbar/
+│   │   ├── product-details/
+│   │   ├── product-list/
+│   │   └── ...
+│   ├── modules/
+│   │   ├── Product.ts
+│   │   ├── Order.ts
+│   │   └── ...
+│   ├── services/
+│   │   ├── auth.service.ts
+│   │   ├── product.service.ts
+│   │   └── ...
+│   ├── app.component.html
+│   ├── app.component.ts
+│   └── ...
+├── assets/
+├── environments/
+├── styles.css
+└── ...
+
+# Testowanie
+
+## Testy jednostkowe
+
+Aby uruchomić testy jednostkowe, użyj następującej komendy:
+
+```bash
+ng test
+```
+
+## Testy end-to-end
+
+Aby uruchomić testy end-to-end, użyj następującej komendy:
+
+```bash
+ng e2e
+```
+
+## Budowanie
+
+Aby zbudować projekt do produkcji, użyj następującej komendy:
+
+```bash
+ng build --prod
+```
+
+Wynik budowania będzie znajdował się w katalogu dist/.
+
+## Stylizacja
+
+Projekt używa Angular Material i Tailwind CSS do stylizacji komponentów. Tailwind CSS jest skonfigurowany w pliku tailwind.config.js, a style są importowane w pliku styles.css.
+
+## Zarządzanie stanem
+
+Projekt używa RxJS do zarządzania stanem aplikacji i obsługi strumieni danych.
+
+## Konfiguracja
+
+Pliki konfiguracyjne znajdują się w katalogu environments/. Używaj environment.ts dla konfiguracji deweloperskiej i environment.prod.ts dla konfiguracji produkcyjnej.
+
+## Autorzy
+
+Adrian Rodzic - Frontend Developer - https://github.com/Yukinevv
+Filip Krawczak - Backend Developer - https://github.com/krawatklad
+
+## Licencja
+
+Ten projekt jest licencjonowany na podstawie licencji MIT.
