@@ -7,13 +7,13 @@ import { Product } from '../../modules/Product';
   styleUrls: ['./product-manage.component.css']
 })
 export class ProductManageComponent {
-  newProduct = { id: 0, name: '', description: '', category: '', price: 0, quantity: 0, imageUrl: '' };
+  newProduct: Product = { id: 0, name: '', description: '', price: 0, quantity: 0, imageUrl: '' };
 
   @Output() addProductEvent = new EventEmitter<Product>();
 
   addProduct() {
     this.addProductEvent.emit(this.newProduct)
-    this.newProduct = { id: 0, name: '', description: '', category: '', price: 0, quantity: 0, imageUrl: '' }; // Reset formularza
+    this.newProduct = { id: 0, name: '', description: '', price: 0, quantity: 0, imageUrl: '' }; // Reset formularza
   }
 
   onImageLoaded(base64Image: string) {

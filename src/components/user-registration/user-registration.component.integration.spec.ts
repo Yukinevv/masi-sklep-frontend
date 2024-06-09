@@ -9,23 +9,18 @@ import { of, throwError } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
+import { Location } from '@angular/common';
+import { Component } from '@angular/core';
 
-describe('UserRegistrationComponent', () => {
+describe('UserRegistrationComponent Integration', () => {
     let component: UserRegistrationComponent;
     let fixture: ComponentFixture<UserRegistrationComponent>;
     let authServiceMock: any;
-    let routerMock: any;
+    let location: Location;
 
     beforeEach(async () => {
         authServiceMock = {
             register: jasmine.createSpy('register').and.returnValue(of({}))
-        };
-
-        routerMock = {
-            navigate: jasmine.createSpy('navigate'),
-            events: of({}),
-            url: '',
-            routerState: { root: {} }
         };
 
         await TestBed.configureTestingModule({
@@ -33,14 +28,15 @@ describe('UserRegistrationComponent', () => {
             imports: [
                 ReactiveFormsModule,
                 HttpClientModule,
-                RouterTestingModule.withRoutes([]),
+                RouterTestingModule.withRoutes([
+                    { path: 'products', component: DummyComponent }
+                ]),
                 NoopAnimationsModule,
                 MatButtonModule
             ],
             providers: [
                 FormBuilder,
-                { provide: AuthService, useValue: authServiceMock },
-                { provide: Router, useValue: routerMock }
+                { provide: AuthService, useValue: authServiceMock }
             ]
         }).compileComponents();
     });
@@ -48,35 +44,11 @@ describe('UserRegistrationComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(UserRegistrationComponent);
         component = fixture.componentInstance;
+        location = TestBed.inject(Location);
         fixture.detectChanges();
     });
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
-
-    it('should initialize form on component creation', () => {
-        expect(component.registerForm).toBeDefined();
-        expect(component.registerForm.controls['email']).toBeDefined();
-        expect(component.registerForm.controls['password']).toBeDefined();
-        expect(component.registerForm.controls['confirmPassword']).toBeDefined();
-    });
-
-    it('should validate that passwords match', () => {
-        const formGroup = component.registerForm;
-        formGroup.controls['password'].setValue('password123');
-        formGroup.controls['confirmPassword'].setValue('password321');
-        formGroup.updateValueAndValidity();
-
-        expect(formGroup.controls['confirmPassword'].errors?.['mustMatch']).toBeTruthy();
-    });
-
-    it('should not submit form if invalid', () => {
-        component.onSubmit();
-        expect(authServiceMock.register).not.toHaveBeenCalled();
-    });
-
-    it('should submit form and navigate to products on success', () => {
+    it('should navigate to /products on successful registration', async () => {
         component.registerForm.controls['name'].setValue('Test');
         component.registerForm.controls['surname'].setValue('User');
         component.registerForm.controls['address'].setValue('123 Test Street');
@@ -85,11 +57,15 @@ describe('UserRegistrationComponent', () => {
         component.registerForm.controls['confirmPassword'].setValue('password123');
 
         component.onSubmit();
+        fixture.detectChanges();
+
+        await fixture.whenStable(); // Czekamy na zakończenie operacji asynchronicznych
+
         expect(authServiceMock.register).toHaveBeenCalled();
-        expect(routerMock.navigate).toHaveBeenCalledWith(['/products']);
+        expect(location.path()).toBe('/products');
     });
 
-    it('should handle registration failure', () => {
+    it('should display error message on registration failure', async () => {
         authServiceMock.register.and.returnValue(throwError('Registration failed'));
         component.registerForm.controls['name'].setValue('Test');
         component.registerForm.controls['surname'].setValue('User');
@@ -99,6 +75,15 @@ describe('UserRegistrationComponent', () => {
         component.registerForm.controls['confirmPassword'].setValue('password123');
 
         component.onSubmit();
+        fixture.detectChanges();
+
+        await fixture.whenStable(); // Czekamy na zakończenie operacji asynchronicznych
+
         expect(component.isRegistrationFailed).toBeTrue();
+        const errorMessage = fixture.debugElement.query(By.css('.error-text')).nativeElement;
+        expect(errorMessage.textContent).toContain('Rejestracja nie powiodła się!');
     });
 });
+
+@Component({ template: '' })
+class DummyComponent { }
