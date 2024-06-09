@@ -84,14 +84,6 @@ Aby uruchomić testy jednostkowe, użyj następującej komendy:
 ng test
 ```
 
-## Testy end-to-end
-
-Aby uruchomić testy end-to-end, użyj następującej komendy:
-
-```bash
-ng e2e
-```
-
 ## Budowanie
 
 Aby zbudować projekt do produkcji, użyj następującej komendy:
