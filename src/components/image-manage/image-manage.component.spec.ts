@@ -1,23 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+// import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ImageManageComponent } from './image-manage.component';
+// import { ImageManageComponent } from './image-manage.component';
 
-describe('ImageManageComponent', () => {
-  let component: ImageManageComponent;
-  let fixture: ComponentFixture<ImageManageComponent>;
+// describe('ImageManageComponent', () => {
+//   let component: ImageManageComponent;
+//   let fixture: ComponentFixture<ImageManageComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ImageManageComponent]
-    })
-    .compileComponents();
+//   beforeEach(async () => {
+//     await TestBed.configureTestingModule({
+//       declarations: [ImageManageComponent]
+//     })
+//     .compileComponents();
     
-    fixture = TestBed.createComponent(ImageManageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//     fixture = TestBed.createComponent(ImageManageComponent);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });

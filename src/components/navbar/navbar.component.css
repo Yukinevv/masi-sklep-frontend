@@ -29,3 +29,15 @@ mat-icon {
 .logout-button {
   @apply text-white bg-red-500 hover:bg-red-700 font-semibold py-2 px-4 rounded;
 }
+
+.cart-badge {
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 8px;
+  font-size: 12px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+}

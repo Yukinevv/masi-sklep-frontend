@@ -1,6 +1,6 @@
 // cart.service.ts
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { CartItem } from '../modules/CartItem';
 import { Product } from '../modules/Product';
 import { HttpClient } from '@angular/common/http';
@@ -45,5 +45,11 @@ export class CartService {
 
   clearCart(): void {
     this.itemsSubject.next([]);
+  }
+
+  getTotalQuantity(): Observable<number> {
+    return this.items$.pipe(
+      map(items => items.reduce((total, item) => total + item.quantity, 0))
+    );
   }
 }

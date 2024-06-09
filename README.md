@@ -49,6 +49,7 @@ Aplikacja będzie dostępna pod adresem http://localhost:4200.
 
 ## Struktura projektu
 
+```
 src/
 ├── app/
 │   ├── components/
@@ -71,6 +72,7 @@ src/
 ├── environments/
 ├── styles.css
 └── ...
+```
 
 # Testowanie
 

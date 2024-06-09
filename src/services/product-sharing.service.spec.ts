@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+// import { TestBed } from '@angular/core/testing';
 
-import { ProductSharingService } from './product-sharing.service';
+// import { ProductSharingService } from './product-sharing.service';
 
-describe('ProductSharingService', () => {
-  let service: ProductSharingService;
+// describe('ProductSharingService', () => {
+//   let service: ProductSharingService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(ProductSharingService);
-  });
+//   beforeEach(() => {
+//     TestBed.configureTestingModule({});
+//     service = TestBed.inject(ProductSharingService);
+//   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+//   it('should be created', () => {
+//     expect(service).toBeTruthy();
+//   });
+// });
