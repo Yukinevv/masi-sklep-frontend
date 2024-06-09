@@ -118,7 +118,3 @@ Pliki konfiguracyjne znajdują się w katalogu environments/. Używaj environmen
 
 Adrian Rodzic - Frontend Developer - https://github.com/Yukinevv
 Filip Krawczak - Backend Developer - https://github.com/krawatklad
-
-## Licencja
-
-Ten projekt jest licencjonowany na podstawie licencji MIT.

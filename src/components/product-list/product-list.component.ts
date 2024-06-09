@@ -14,7 +14,6 @@ import { CartService } from '../../services/cart.service';
 export class ProductListComponent implements OnInit {
 
   products: Product[] = []
-
   filteredProducts: Product[] = []
 
   isAdmin: boolean = false;
@@ -24,6 +23,9 @@ export class ProductListComponent implements OnInit {
     private router: Router, private cartService: CartService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.products = [];
+    this.filteredProducts = [];
+
     this.isAdmin = this.authService.isAdmin();
     this.isLoggedIn = this.authService.getUserEmail() != null ? true : false;
 
