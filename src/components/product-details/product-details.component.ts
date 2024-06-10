@@ -58,11 +58,16 @@ export class ProductDetailsComponent implements OnInit {
 
   addToCart() {
     if (this.selectedQuantity > 0 && this.selectedQuantity <= this.product!.quantity) {
-      this.cartService.addItem(this.product!, this.selectedQuantity);
-
-      this.snackBar.open('Produkt dodany do koszyka', 'Zamknij', {
-        duration: 2000,
-      });
+      const added = this.cartService.addItem(this.product!, this.selectedQuantity);
+      if (added) {
+        this.snackBar.open('Produkt dodany do koszyka', 'Zamknij', {
+          duration: 2000,
+        });
+      } else {
+        this.snackBar.open(`Maksymalna dostępna ilość to ${this.product!.quantity}`, 'Zamknij', {
+          duration: 2000,
+        });
+      }
     }
   }
 

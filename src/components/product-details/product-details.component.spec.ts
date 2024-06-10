@@ -46,7 +46,7 @@ describe('ProductDetailsComponent', () => {
         };
 
         cartServiceMock = {
-            addItem: jasmine.createSpy('addItem')
+            addItem: jasmine.createSpy('addItem').and.returnValue(true)
         };
 
         snackBarMock = {
@@ -132,9 +132,11 @@ describe('ProductDetailsComponent', () => {
         expect(consoleSpy).toHaveBeenCalledWith('Error updating product:', 'Error updating product');
     });
 
-    it('should add product to cart and show snackbar', () => {
+    it('should add product to cart and show snackbar when quantity is valid', () => {
         component.product = mockProduct;
         component.selectedQuantity = 1;
+        cartServiceMock.addItem.and.returnValue(true);
+
         component.addToCart();
 
         expect(cartServiceMock.addItem).toHaveBeenCalledWith(mockProduct, 1);

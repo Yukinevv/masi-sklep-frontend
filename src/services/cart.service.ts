@@ -27,15 +27,31 @@ export class CartService {
     });
   }
 
-  addItem(product: Product, quantity: number = 1): void {
+  addItem(product: Product, quantity: number = 1): boolean {
     const currentItems = this.itemsSubject.value;
     const existingItem = currentItems.find(item => item.product.id === product.id);
-    if (existingItem) {
-      existingItem.quantity += quantity;
+    const totalQuantity = (existingItem ? existingItem.quantity : 0) + quantity;
+
+    if (totalQuantity <= product.quantity) {
+      if (existingItem) {
+        existingItem.quantity += quantity;
+      } else {
+        currentItems.push({ product, quantity });
+      }
+      this.itemsSubject.next(currentItems);
+      return true; // Produkt został dodany pomyślnie
     } else {
-      currentItems.push({ product, quantity });
+      return false; // Przekroczono maksymalną ilość
     }
-    this.itemsSubject.next(currentItems);
+  }
+
+  updateItemQuantity(productId: number, quantity: number): void {
+    const currentItems = this.itemsSubject.value;
+    const item = currentItems.find(item => item.product.id === productId);
+    if (item) {
+      item.quantity = quantity;
+      this.itemsSubject.next(currentItems);
+    }
   }
 
   removeItem(productId: number): void {

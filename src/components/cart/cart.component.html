@@ -1,7 +1,9 @@
 <div *ngIf="cartItems.length > 0; else emptyCart" class="cart-container">
     <div *ngFor="let item of cartItems" class="cart-item">
         <img [src]="item.product.imageUrl" alt="{{ item.product.name }}" class="cart-item-image">
-        <p class="cart-item-details">{{ item.product.name }} - {{ item.product.price }} zł, Qty: {{ item.quantity }}</p>
+        <p class="cart-item-details">{{ item.product.name }} - {{ item.product.price }} zł</p>
+        <input type="number" [value]="item.quantity" (change)="updateQuantity(item.product.id, $event)"
+            [max]="item.product.quantity" min="1">
         <button mat-button color="warn" (click)="removeItem(item.product.id)" class="remove-button">Usuń</button>
     </div>
     <div class="cart-actions">

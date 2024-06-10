@@ -3,7 +3,7 @@
 
 <div class="product-list-container">
     <div *ngFor="let product of filteredProducts" class="product-item">
-        <app-product-view *ngIf="product.id" [product]="product" (onAddToCart)="handleAddToCart($event)"
+        <app-product-view *ngIf="product.id" [product]="product"
             (deleteProductEvent)="deleteProduct($event)"></app-product-view>
     </div>
 </div>

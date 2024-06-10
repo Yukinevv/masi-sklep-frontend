@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ProductService } from '../../services/product.service';
 import { AuthService } from '../../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product-view',
@@ -23,15 +24,19 @@ export class ProductViewComponent implements OnInit {
     imageUrl: ''
   }
 
-  @Output() onAddToCart = new EventEmitter<{ product: Product, quantity: number }>();
-
   @Output() deleteProductEvent = new EventEmitter<number>();
 
   selectedQuantity: number = 1;
   isAdmin: boolean = false;
 
-  constructor(private productSharingService: ProductSharingService, private productService: ProductService,
-    private authService: AuthService, private snackBar: MatSnackBar, public dialog: MatDialog) { }
+  constructor(
+    private productSharingService: ProductSharingService,
+    private productService: ProductService,
+    private authService: AuthService,
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog,
+    private cartService: CartService
+  ) { }
 
   ngOnInit(): void {
     this.isAdmin = this.authService.isAdmin();
@@ -43,11 +48,16 @@ export class ProductViewComponent implements OnInit {
 
   addToCart() {
     if (this.selectedQuantity > 0 && this.selectedQuantity <= this.product.quantity) {
-      this.onAddToCart.emit({ product: this.product, quantity: this.selectedQuantity });
-
-      this.snackBar.open('Produkt dodany do koszyka', 'Zamknij', {
-        duration: 2000,
-      });
+      const added = this.cartService.addItem(this.product, this.selectedQuantity);
+      if (added) {
+        this.snackBar.open('Produkt dodany do koszyka', 'Zamknij', {
+          duration: 2000,
+        });
+      } else {
+        this.snackBar.open(`Maksymalna dostępna ilość to ${this.product.quantity}`, 'Zamknij', {
+          duration: 2000,
+        });
+      }
     }
   }
 

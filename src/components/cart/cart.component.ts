@@ -28,6 +28,18 @@ export class CartComponent implements OnInit {
     });
   }
 
+  updateQuantity(productId: number, event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    const quantity = inputElement.valueAsNumber;
+
+    const maxQuantity = this.cartItems.find(item => item.product.id === productId)?.product.quantity ?? 0;
+    if (quantity > 0 && quantity <= maxQuantity) {
+      this.cartService.updateItemQuantity(productId, quantity);
+    } else {
+      this.snackBar.open(`Maksymalna dostępna ilość to ${maxQuantity}`, 'Zamknij', { duration: 2000 });
+    }
+  }
+
   removeItem(productId: number): void {
     this.cartService.removeItem(productId);
   }

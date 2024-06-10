@@ -1,5 +1,5 @@
 .toolbar {
-  @apply bg-blue-600 text-white flex items-center justify-between px-6;
+  @apply bg-blue-600 text-white flex items-center justify-between px-6 sticky top-0 z-50;
 }
 
 .logo {

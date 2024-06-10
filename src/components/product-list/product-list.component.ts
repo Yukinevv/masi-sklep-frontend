@@ -32,7 +32,7 @@ export class ProductListComponent implements OnInit {
     this.productService.getProducts().subscribe(
       (response: Product[]) => {
         this.products.push(...response);
-        this.filteredProducts = this.products.filter(product => product.quantity !== null);
+        this.filteredProducts = this.products.filter(product => product.quantity !== null && product.quantity !== 0);
       },
       (error) => {
         console.error('Error fetching products', error);
@@ -46,7 +46,7 @@ export class ProductListComponent implements OnInit {
 
   applyFilterByName(filterValue: string) {
     this.filteredProducts = this.products.filter(product =>
-      product.name.toLowerCase().includes(filterValue.toLowerCase())
+      product.name.toLowerCase().includes(filterValue.toLowerCase()) && product.quantity !== null && product.quantity !== 0
     );
   }
 
@@ -70,7 +70,7 @@ export class ProductListComponent implements OnInit {
       next: (response) => {
         console.log('Product added successful', response);
         this.products.push(newProduct);
-        this.filteredProducts = this.products.filter(product => product.quantity !== null);
+        this.filteredProducts = this.products.filter(product => product.quantity !== null && product.quantity !== 0);
       },
       error: (error) => {
         console.error('Product adding failed', error);
