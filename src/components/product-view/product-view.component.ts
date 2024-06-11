@@ -1,4 +1,3 @@
-// product-view.component.ts
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Product } from '../../modules/Product';
 import { ProductSharingService } from '../../services/product-sharing.service';
@@ -15,6 +14,10 @@ import { CartService } from '../../services/cart.service';
   styleUrls: ['./product-view.component.css']
 })
 export class ProductViewComponent implements OnInit {
+  /**
+   * The product to display in the view.
+   * @type {Product}
+   */
   @Input() product: Product = {
     id: 0,
     name: '',
@@ -24,11 +27,34 @@ export class ProductViewComponent implements OnInit {
     imageUrl: ''
   }
 
+  /**
+   * Event emitted when a product is deleted.
+   * @type {EventEmitter<number>}
+   */
   @Output() deleteProductEvent = new EventEmitter<number>();
 
+  /**
+   * The quantity of the product selected by the user.
+   * @type {number}
+   */
   selectedQuantity: number = 1;
+
+  /**
+   * Indicates whether the logged-in user is an admin.
+   * @type {boolean}
+   */
   isAdmin: boolean = false;
 
+  /**
+   * Creates an instance of ProductViewComponent.
+   *
+   * @param {ProductSharingService} productSharingService - Service to share product data.
+   * @param {ProductService} productService - Service to handle product operations.
+   * @param {AuthService} authService - Service to handle authentication.
+   * @param {MatSnackBar} snackBar - Service to show snack bar notifications.
+   * @param {MatDialog} dialog - Service to handle dialog operations.
+   * @param {CartService} cartService - Service to handle cart operations.
+   */
   constructor(
     private productSharingService: ProductSharingService,
     private productService: ProductService,
@@ -38,15 +64,28 @@ export class ProductViewComponent implements OnInit {
     private cartService: CartService
   ) { }
 
+  /**
+   * Initializes the component.
+   * Checks if the logged-in user is an admin.
+   */
   ngOnInit(): void {
     this.isAdmin = this.authService.isAdmin();
   }
 
-  selectProduct(product: Product) {
+  /**
+   * Selects a product and shares it using the ProductSharingService.
+   *
+   * @param {Product} product - The product to select.
+   */
+  selectProduct(product: Product): void {
     this.productSharingService.setCurrentProduct(product);
   }
 
-  addToCart() {
+  /**
+   * Adds the selected quantity of the product to the cart.
+   * Displays a snack bar notification on success or error.
+   */
+  addToCart(): void {
     if (this.selectedQuantity > 0 && this.selectedQuantity <= this.product.quantity) {
       const added = this.cartService.addItem(this.product, this.selectedQuantity);
       if (added) {
@@ -61,14 +100,20 @@ export class ProductViewComponent implements OnInit {
     }
   }
 
-  deleteProduct(id: number) {
+  /**
+   * Deletes a product after confirming with the user.
+   * Emits deleteProductEvent on successful deletion.
+   *
+   * @param {number} id - The ID of the product to delete.
+   */
+  deleteProduct(id: number): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.productService.deleteProduct(id).subscribe({
           next: (response) => {
-            console.log('Product deleted successful', response);
+            console.log('Product deleted successfully', response);
             this.deleteProductEvent.emit(id);
           },
           error: (error) => {

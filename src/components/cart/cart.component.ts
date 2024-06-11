@@ -1,4 +1,3 @@
-// cart.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { CartItem } from '../../modules/CartItem';
@@ -12,12 +11,32 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
+  /**
+   * Array of items currently in the cart.
+   * @type {CartItem[]}
+   */
   cartItems: CartItem[] = [];
 
-  constructor(private cartService: CartService, private authService: AuthService, private router: Router,
+  /**
+   * Creates an instance of CartComponent.
+   *
+   * @param {CartService} cartService - Service to handle cart operations.
+   * @param {AuthService} authService - Service to handle authentication.
+   * @param {Router} router - Router service to navigate between routes.
+   * @param {MatSnackBar} snackBar - Service to show snack bar notifications.
+   */
+  constructor(
+    private cartService: CartService,
+    private authService: AuthService,
+    private router: Router,
     private snackBar: MatSnackBar
   ) { }
 
+  /**
+   * Initializes the component.
+   * Redirects to login if user is not authenticated.
+   * Subscribes to cart items updates.
+   */
   ngOnInit(): void {
     if (!this.authService.getToken()) {
       this.router.navigate(['/login']);
@@ -28,6 +47,13 @@ export class CartComponent implements OnInit {
     });
   }
 
+  /**
+   * Updates the quantity of a specific item in the cart.
+   * Displays a snack bar notification if the quantity is invalid.
+   *
+   * @param {number} productId - The ID of the product.
+   * @param {Event} event - The input event containing the new quantity.
+   */
   updateQuantity(productId: number, event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     const quantity = inputElement.valueAsNumber;
@@ -40,14 +66,27 @@ export class CartComponent implements OnInit {
     }
   }
 
+  /**
+   * Removes an item from the cart.
+   *
+   * @param {number} productId - The ID of the product to remove.
+   */
   removeItem(productId: number): void {
     this.cartService.removeItem(productId);
   }
 
+  /**
+   * Clears all items from the cart.
+   */
   clearCart(): void {
     this.cartService.clearCart();
   }
 
+  /**
+   * Places an order with the current cart items.
+   * Clears the cart and displays a snack bar notification on success.
+   * Displays an error message on failure.
+   */
   placeOrder(): void {
     this.cartService.placeOrder(this.cartItems).subscribe({
       next: (response) => {

@@ -8,10 +8,23 @@ import { Order } from '../../modules/Order';
   styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit {
+  /**
+   * Array of orders fetched from the server.
+   * @type {Order[]}
+   */
   orders: Order[] = [];
 
+  /**
+   * Creates an instance of OrdersComponent.
+   *
+   * @param {OrderService} orderService - Service to handle order operations.
+   */
   constructor(private orderService: OrderService) { }
 
+  /**
+   * Initializes the component.
+   * Fetches the list of orders and assigns them to the orders property.
+   */
   ngOnInit(): void {
     this.orderService.listOrders().subscribe({
       next: (orders) => {
@@ -23,6 +36,11 @@ export class OrdersComponent implements OnInit {
     });
   }
 
+  /**
+   * Sorts the orders based on their date.
+   *
+   * @param {'asc' | 'desc'} direction - The direction to sort the orders: ascending or descending.
+   */
   sortOrders(direction: 'asc' | 'desc'): void {
     this.orders.sort((a, b) => {
       const dateA = new Date(a.date).getTime();

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../modules/Product';
@@ -13,12 +13,35 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
+  /**
+   * The product to display details for.
+   * @type {Product | null}
+   */
   product: Product | null = null;
 
+  /**
+   * The quantity of the product selected by the user.
+   * @type {number}
+   */
   selectedQuantity: number = 1;
 
+  /**
+   * Indicates whether the logged-in user is an admin.
+   * @type {boolean}
+   */
   isAdmin: boolean = false;
 
+  /**
+   * Creates an instance of ProductDetailsComponent.
+   *
+   * @param {ActivatedRoute} route - Service to access route parameters.
+   * @param {ProductService} productService - Service to handle product operations.
+   * @param {AuthService} authService - Service to handle authentication.
+   * @param {ProductSharingService} productSharingService - Service to share product data.
+   * @param {CartService} cartService - Service to handle cart operations.
+   * @param {Router} router - Router service to navigate between routes.
+   * @param {MatSnackBar} snackBar - Service to show snack bar notifications.
+   */
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
@@ -29,7 +52,11 @@ export class ProductDetailsComponent implements OnInit {
     private snackBar: MatSnackBar
   ) { }
 
-  ngOnInit() {
+  /**
+   * Initializes the component.
+   * Fetches product details and checks if the user is an admin.
+   */
+  ngOnInit(): void {
     this.route.params.subscribe(params => {
       const productId = +params['id'];
       this.product = this.productSharingService.getCurrentProduct();
@@ -42,6 +69,10 @@ export class ProductDetailsComponent implements OnInit {
     });
   }
 
+  /**
+   * Saves the updated product details.
+   * Navigates to the product list on success.
+   */
   saveProduct(): void {
     if (this.product) {
       this.productService.updateProduct(this.product).subscribe({
@@ -56,7 +87,11 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
-  addToCart() {
+  /**
+   * Adds the selected quantity of the product to the cart.
+   * Displays a snack bar notification on success or error.
+   */
+  addToCart(): void {
     if (this.selectedQuantity > 0 && this.selectedQuantity <= this.product!.quantity) {
       const added = this.cartService.addItem(this.product!, this.selectedQuantity);
       if (added) {

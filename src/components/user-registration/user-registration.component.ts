@@ -10,10 +10,31 @@ import { User } from '../../modules/User';
   styleUrls: ['./user-registration.component.css']
 })
 export class UserRegistrationComponent {
+  /**
+   * Form group for the registration form.
+   * @type {FormGroup}
+   */
   registerForm: FormGroup;
+
+  /**
+   * Indicates whether the form has been submitted.
+   * @type {boolean}
+   */
   submitted: boolean = false;
+
+  /**
+   * Indicates whether the registration attempt has failed.
+   * @type {boolean}
+   */
   isRegistrationFailed: boolean = false;
 
+  /**
+   * Creates an instance of UserRegistrationComponent.
+   *
+   * @param {FormBuilder} formBuilder - Service to build the form group.
+   * @param {AuthService} authService - Service to handle authentication.
+   * @param {Router} router - Router service to navigate between routes.
+   */
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {
     this.registerForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -27,6 +48,13 @@ export class UserRegistrationComponent {
     });
   }
 
+  /**
+   * Custom validator to check that two fields match.
+   *
+   * @param {string} password - The name of the password field.
+   * @param {string} confirmPassword - The name of the confirm password field.
+   * @returns {Function} A function to validate the form group.
+   */
   mustMatch(password: string, confirmPassword: string) {
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[password];
@@ -44,7 +72,11 @@ export class UserRegistrationComponent {
     };
   }
 
-  onSubmit() {
+  /**
+   * Handles form submission for registration.
+   * Validates the form, registers the user, and handles success or failure.
+   */
+  onSubmit(): void {
     this.submitted = true;
     this.isRegistrationFailed = false;
     if (this.registerForm.invalid) {

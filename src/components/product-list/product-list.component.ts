@@ -9,19 +9,55 @@ import { CartService } from '../../services/cart.service';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.css'
+  styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
 
+  /**
+   * Array of all products.
+   * @type {Product[]}
+   */
   products: Product[] = []
+
+  /**
+   * Array of products filtered based on certain criteria.
+   * @type {Product[]}
+   */
   filteredProducts: Product[] = []
 
+  /**
+   * Indicates whether the logged-in user is an admin.
+   * @type {boolean}
+   */
   isAdmin: boolean = false;
+
+  /**
+   * Indicates whether the user is logged in.
+   * @type {boolean}
+   */
   isLoggedIn: boolean = false;
 
-  constructor(private productService: ProductService, private authService: AuthService,
-    private router: Router, private cartService: CartService, public dialog: MatDialog) { }
+  /**
+   * Creates an instance of ProductListComponent.
+   *
+   * @param {ProductService} productService - Service to handle product operations.
+   * @param {AuthService} authService - Service to handle authentication.
+   * @param {Router} router - Router service to navigate between routes.
+   * @param {CartService} cartService - Service to handle cart operations.
+   * @param {MatDialog} dialog - Service to handle dialog operations.
+   */
+  constructor(
+    private productService: ProductService,
+    private authService: AuthService,
+    private router: Router,
+    private cartService: CartService,
+    public dialog: MatDialog
+  ) { }
 
+  /**
+   * Initializes the component.
+   * Fetches the list of products and sets the initial state of isAdmin and isLoggedIn.
+   */
   ngOnInit(): void {
     this.products = [];
     this.filteredProducts = [];
@@ -40,17 +76,34 @@ export class ProductListComponent implements OnInit {
     );
   }
 
-  handleAddToCart(event: { product: Product, quantity: number }) {
+  /**
+   * Handles adding a product to the cart.
+   *
+   * @param {Object} event - The event object containing the product and quantity.
+   * @param {Product} event.product - The product to add to the cart.
+   * @param {number} event.quantity - The quantity of the product to add.
+   */
+  handleAddToCart(event: { product: Product, quantity: number }): void {
     this.cartService.addItem(event.product, event.quantity);
   }
 
-  applyFilterByName(filterValue: string) {
+  /**
+   * Applies a filter to the product list based on the product name.
+   *
+   * @param {string} filterValue - The value to filter the products by.
+   */
+  applyFilterByName(filterValue: string): void {
     this.filteredProducts = this.products.filter(product =>
       product.name.toLowerCase().includes(filterValue.toLowerCase()) && product.quantity !== null && product.quantity !== 0
     );
   }
 
-  applySort(sortDirection: string) {
+  /**
+   * Sorts the product list based on the product name.
+   *
+   * @param {string} sortDirection - The direction to sort the products ('asc' or 'desc').
+   */
+  applySort(sortDirection: string): void {
     this.filteredProducts.sort((a, b) => {
       if (a.name < b.name) {
         return sortDirection === 'asc' ? -1 : 1;
@@ -62,13 +115,17 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  addProduct(newProduct: Product) {
+  /**
+   * Adds a new product to the list and sends it to the server.
+   *
+   * @param {Product} newProduct - The product to add.
+   */
+  addProduct(newProduct: Product): void {
     newProduct.id = this.products.length + 1;
 
-    // wyslanie produktu do api
     this.productService.addProduct(newProduct).subscribe({
       next: (response) => {
-        console.log('Product added successful', response);
+        console.log('Product added successfully', response);
         this.products.push(newProduct);
         this.filteredProducts = this.products.filter(product => product.quantity !== null && product.quantity !== 0);
       },
@@ -78,7 +135,12 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  deleteProduct(id: number) {
+  /**
+   * Deletes a product from the list based on its ID.
+   *
+   * @param {number} id - The ID of the product to delete.
+   */
+  deleteProduct(id: number): void {
     this.filteredProducts = this.filteredProducts.filter(product => product.id !== id);
   }
 

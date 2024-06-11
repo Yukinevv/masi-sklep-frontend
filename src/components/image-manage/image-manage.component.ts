@@ -3,12 +3,27 @@ import { Component, EventEmitter, Output } from '@angular/core';
 @Component({
   selector: 'app-image-manage',
   templateUrl: './image-manage.component.html',
-  styleUrl: './image-manage.component.css'
+  styleUrls: ['./image-manage.component.css']
 })
 export class ImageManageComponent {
+  /**
+   * Event emitted when an image is converted to a base64 string.
+   * @type {EventEmitter<string>}
+   */
   @Output() base64Event = new EventEmitter<string>();
-  base64String: string = ''
 
+  /**
+   * Holds the base64 string representation of the selected image.
+   * @type {string}
+   */
+  base64String: string = '';
+
+  /**
+   * Handles the file input change event.
+   * Converts the selected file to a base64 string and emits the base64Event.
+   *
+   * @param {Event} event - The file input change event.
+   */
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
     if (file) {
@@ -19,6 +34,12 @@ export class ImageManageComponent {
     }
   }
 
+  /**
+   * Converts an image file to a base64 string.
+   *
+   * @param {File} file - The image file to convert.
+   * @returns {Promise<string>} A promise that resolves with the base64 string of the image.
+   */
   private convertImageToBase64(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
